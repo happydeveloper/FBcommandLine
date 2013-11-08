@@ -99,7 +99,7 @@ if($user) {
 					echo "<span>".$value."</span>";
 
 				if($key == 'permalink') {
-					echo "<a href='". $value."'>".$key." 영구링크</a>";
+					echo "<a href='". $value."' target='_blank' >".$key." 영구링크</a>";
 				}
 				if($key == 'message') {
 					echo "<p class='message'>".$value."</p>";
