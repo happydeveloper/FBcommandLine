@@ -121,7 +121,6 @@ if($user) {
 	else {
 		echo "<h2>Command Line</h2>";
 	}
-//		print_r($result);
     ?>
   </body>
 
