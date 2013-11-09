@@ -104,8 +104,11 @@ if($user) {
 			echo "<article>";
 			foreach($row as $key=>$value){
 
-				if($key == 'created_time')
-					echo "<span>".$value."</span>";
+				if($key == 'created_time') {
+				        // $kor_time = new Datetime($value);
+					echo "<span>".gmdate('Y-m-d TH:i:s', $value)."</span>";
+					
+				}
 
 				if($key == 'permalink') {
 					echo "<a href='". $value."' target='_blank' >".$key." 영구링크</a>";
