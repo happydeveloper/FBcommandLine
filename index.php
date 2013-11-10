@@ -47,7 +47,7 @@ if($user) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
-    <title>php-sdk</title>
+    <title>fbCommandLine</title>
     <style>
       body {
         font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
@@ -75,7 +75,8 @@ if($user) {
       <a href="<?php echo 'Logout.php';//echo $logoutUrl; ?>">Logout</a>
     <?php else: ?>
       <div>
-        <a href="<?php echo $loginUrl; ?>">Login with Facebook</a>
+        <a href="<?php echo $loginUrl; ?>">얼굴책 들어가기</a>
+	<!-- <a href="<?php echo $loginUrl; ?>">Login with Facebook</a> -->
       </div>
     <?php endif ?>
 
@@ -94,7 +95,6 @@ if($user) {
 	else {
 		echo "<h2>Command Line</h2>";
 	}
-//		print_r($result);
     ?>
   </body>
 
