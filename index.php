@@ -93,7 +93,8 @@ if($user) {
 	}
 	}
 	else {
-		echo "<h2>Command Line</h2>";
+		//echo "<h2>Command Line</h2>";
+		echo "<h2>얼굴책 명령어 라인</h2>";
 	}
     ?>
   </body>
