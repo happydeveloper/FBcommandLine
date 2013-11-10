@@ -40,7 +40,7 @@ $unix_date_format = $date->format('U');
 $unix_date_format_prev =  $previous_date->format('U');
 
 $fql = "SELECT created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$unix_date_format." AND created_time >= ".$unix_date_format_prev." LIMIT 50";
-echo $fql."<br />";
+//echo $fql."<br />";
 if($user) {
  //Create Query
     $params = array(
