@@ -9,20 +9,31 @@ require_once "lib/facebook.php";
 class ot_comment
 {
 	//페이스북 객체
-	protected $facebook;
+	public $facebook;
 	
 	//사용자 아이디 가져온다
-	protected $user;
+	public $user;
+
+	//사용자 프로필
+	public $user_profile;
 
 	public function __construct($source_id) {
 
-	$facebook = new Facebook(array(
+	$this->facebook = new Facebook(array(
 		'appId' => '541305629256667',
 		'secret' => '95492b0183156cd27d69b1308980ef26',
 		'cookie' => true));
 
-	$user = $facebook->getUser();
-
+	$this->user = $this->facebook->getUser();
+	var_dump($this->user);
+	if($this->user) {
+			try {
+				$this->user_profile = $this->facebook->api('/me');
+			} catch (FacebookApiException $e) {
+				error_log($e);
+				$this->user = null;
+			}
+		}	
 	}
 
 	public function getComment(){
@@ -30,13 +41,10 @@ class ot_comment
 	}
 
 	public function getUserState(){
-		if($this->user) {
-			return $logoutUrl = $this->facebook->getLogoutUrl();
-		}else {
-			return $loginUrl = $this->facebook->getLoginUrl();
-		}
+		echo 'user 상태 여부 가져오기';
 	}
 }
+
 ?>
 
 <html>
@@ -49,9 +57,7 @@ class ot_comment
 	<?php
 		$comment = new ot_comment('10332');
 		$comment->getComment();
-	?>
-	<?php
-		echo $comment->getUserState();
+		$comment->getUserState();
 	?>
 </body>
 </html>
