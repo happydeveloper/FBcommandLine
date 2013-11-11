@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-	include 'lib/facebook.php';
+	require_once 'lib/facebook.php';
 
 	$facebook = new Facebook(array(
 		'appId' => '541305629256667',
