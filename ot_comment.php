@@ -42,6 +42,11 @@ class ot_comment
 
 	public function getUserState(){
 		echo 'user 상태 여부 가져오기';
+		if($this->user) {
+			return $logoutUrl = $this->facebook->getLogoutUrl();
+		} else {
+			return $loginUrl = $this->facebook->getLoginUrl();
+		}
 	}
 }
 
@@ -57,7 +62,7 @@ class ot_comment
 	<?php
 		$comment = new ot_comment('10332');
 		$comment->getComment();
-		$comment->getUserState();
+		echo $comment->getUserState();
 	?>
 </body>
 </html>
