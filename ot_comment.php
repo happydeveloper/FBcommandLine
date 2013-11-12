@@ -17,6 +17,10 @@ class ot_comment
 	//사용자 프로필
 	public $user_profile;
 
+	//FQL 쿼리
+	public $fql;
+
+
 	public function __construct($source_id) {
 
 	$this->facebook = new Facebook(array(
@@ -37,7 +41,12 @@ class ot_comment
 	}
 
 	public function getComment(){
-		echo 'comment_barabra';
+		echo 'call comment';
+		if($this->user) {
+			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id in (SELECT post_id FROM stream WHERE source_id='174499879257223' LIMIT 10)";
+			$params = array('method' => 'fql.query', 'query' => $this->fql, );
+			return $this->facebook->api($params);
+		}	
 	}
 
 	public function getUserState(){
@@ -61,8 +70,10 @@ class ot_comment
 	<p>댓글 가져오기</p>
 	<?php
 		$comment = new ot_comment('10332');
-		$comment->getComment();
+		//$comment->getComment();
 		echo $comment->getUserState();
+
+		var_dump($comment->getComment());
 	?>
 </body>
 </html>
