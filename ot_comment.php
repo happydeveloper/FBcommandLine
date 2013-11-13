@@ -40,10 +40,9 @@ class Ot_comment
 		}	
 	}
 
-	public function getComment(){
-		echo 'call comment';
+	public function getComment($post_id=0){
 		if($this->user) {
-			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id in (SELECT post_id FROM stream WHERE source_id='174499879257223' LIMIT 10)";
+			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
 			$params = array('method' => 'fql.query', 'query' => $this->fql, );
 			return $this->facebook->api($params);
 		}	
@@ -71,9 +70,15 @@ class Ot_comment
 	<?php
 		$comment = new ot_comment('10332');
 		//$comment->getComment();
+		echo "<br />";
 		echo $comment->getUserState();
+		echo "<br />";
 
+		if(isset($_GET['post_id'])) {
+		var_dump($comment->getComment($_GET['post_id'])); //POST변경 예정
+		} else {
 		var_dump($comment->getComment());
+		}
 	?>
 </body>
 </html>
