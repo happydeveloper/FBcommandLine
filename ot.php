@@ -56,18 +56,6 @@ if($user) {
     <meta charset="utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
     <title>fbCommandLine</title>
-    <style>
-      body {
-        font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
-      }
-      h1 a {
-        text-decoration: none;
-        color: #3b5998;
-      }
-      h1 a:hover {
-        text-decoration: underline;
-      }
-    </style>
   </head>
   <body>
 
