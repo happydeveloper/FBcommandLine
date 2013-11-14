@@ -63,11 +63,11 @@ if($user) {
   </head>
   <body>
 <?php
-	include_once 'common/nav.php';
+	include_once 'include/nav.php';
 ?>
 
     <?php if ($user): ?>
-      <a href="<?php echo 'Logout.php';//echo $logoutUrl; ?>">Logout</a>
+      <a href="<?php echo 'common/logout.php';//echo $logoutUrl; ?>">Logout</a>
     <?php else: ?>
       <div>
         <a href="<?php echo $loginUrl; ?>">얼굴책 들어가기</a>
@@ -88,7 +88,6 @@ if($user) {
 	}
 	}
 	else {
-		//echo "<h2>Command Line</h2>";
 		echo "<h2>얼굴책 명령어 라인</h2>";
 	}
     ?>
