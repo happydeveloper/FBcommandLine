@@ -69,7 +69,6 @@ class Ot_comment
 	<p>댓글 가져오기</p>
 	<?php
 		$comment = new ot_comment('10332');
-		//$comment->getComment();
 		echo "<br />";
 		echo $comment->getUserState();
 		echo "<br />";
