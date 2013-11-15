@@ -45,9 +45,19 @@ class Ot_stream
 
 	public function getStream($startDate, $endDate)
 	{
+		$unixFormat = new $
+		if(!empty($_POST['start']) && !empty($_POST['end'])) {
+			$previousDate = new Datetime($_POST['start']);
+			$currentDate  = new Datetime($_POST['end']);
+		}
 		if($this->user) {
 			$this->fql = "SELECT created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$startDate." AND created_time >= ".$endDate." LIMIT 50";
 		}
+
+		$param = array('method' => 'fql.query', 'query' => $this->fql, );
+		return $this->facebook->api($params);
+
+		
 	}
 
 }
@@ -64,12 +74,6 @@ if(!empty($_POST['start']) && !empty($_POST['end'])){
 $unix_date_format = $date->format('U');
 $unix_date_format_prev =  $previous_date->format('U');
 
-if($user) {
- //Create Query
-    $params = array(
-        'method' => 'fql.query',
-        'query' => $fql,
-    );
  
     //Run Query
     $result = $facebook->api($params);
