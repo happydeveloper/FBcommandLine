@@ -2,31 +2,56 @@
 <html lang="en">
 <?php
 	require_once 'lib/facebook.php';
+class Ot_stream
+{
+	//페이스북 객체 
+	public $facebook;
 
-	$facebook = new Facebook(array(
+	public $user;
+
+	public $user_profile;
+
+	public $fql;
+
+	public function __construct() 
+	{
+
+	$this->facebook = new Facebook(array(
 		'appId' => '541305629256667',
 		'secret' => '95492b0183156cd27d69b1308980ef26',
 		'cookie' => true));
 
-// Get User ID
-$user = $facebook->getUser();
-//var_dump($user);
-//echo $user;
-if($user) {
-  try {
-    // Proceed knowing you have a logged in user who's authenticated.
-    $user_profile = $facebook->api('/me');
-  } catch (FacebookApiException $e) {
-    error_log($e);
-    $user = null;
-  }
+	$this->user = $this->facebook->getUser();
+	
+		if($this->user) 
+		{
+
+			try {
+				$this->user_profile = $this->facebook->api('/me');
+			} catch(FacebookApiException $e) {
+				error_log($e);
+				$this->user = null;
+			}
+		}
+	}
+
+	public function getUserState(){
+		if($this->user) {
+			return $logoutUrl = $this->facebook->getLogoutUrl();
+		} else {
+			return $loginUrl = $this->facebook->getLoginUrl();
+		}
+	}
+
+	public function getStream($startDate, $endDate)
+	{
+		if($this->user) {
+			$this->fql = "SELECT created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$startDate." AND created_time >= ".$endDate." LIMIT 50";
+		}
+	}
+
 }
-// Login or logout url will be needed depending on current user state.
-if ($user) {
-  $logoutUrl = $facebook->getLogoutUrl();
-} else {
-  $loginUrl = $facebook->getLoginUrl();
-}
+
 
 if(!empty($_POST['start']) && !empty($_POST['end'])){
 // This call will always work since we are fetching public data.
@@ -39,8 +64,6 @@ if(!empty($_POST['start']) && !empty($_POST['end'])){
 $unix_date_format = $date->format('U');
 $unix_date_format_prev =  $previous_date->format('U');
 
-$fql = "SELECT created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$unix_date_format." AND created_time >= ".$unix_date_format_prev." LIMIT 50";
-//echo $fql."<br />";
 if($user) {
  //Create Query
     $params = array(
