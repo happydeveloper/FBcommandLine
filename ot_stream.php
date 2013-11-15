@@ -60,27 +60,25 @@ if($user) {
   <body>
 
 <?php
-	include_once 'common/nav.php';
+	include_once 'include/nav.php';
 ?>
 
     <?php if ($user): ?>
-      <a href="<?php echo 'Logout.php';//echo $logoutUrl; ?>">Logout</a>
+      <a href="<?php echo 'common/logout.php';//echo $logoutUrl; ?>">Logout</a>
     <?php else: ?>
       <div>
         <a href="<?php echo $loginUrl; ?>">Login with Facebook</a>
       </div>
     <?php endif ?>
-<form action="ot.php" method="POST">
-	<p><label>시작일</label><input type="text" name="start" /></p>
-        <p><label>종료일</label><input type="text" name="end" /></p>
+<form action="ot_stream.php" method="POST">
+	<p><label>시작일</label><input type="text" name="start" value="2013-11-15"/></p>
+        <p><label>종료일</label><input type="text" name="end"   value="2013-11-16"/></p>
  
         <input type="submit" />
 </form>
     <?php
 
-	//var_dump($result);
 	if($user) {
-	//var_dump($result);
 
 	foreach($result as $row){
 
