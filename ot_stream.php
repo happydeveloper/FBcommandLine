@@ -45,39 +45,25 @@ class Ot_stream
 
 	public function getStream($startDate, $endDate)
 	{
-		$unixFormat = new $
-		if(!empty($_POST['start']) && !empty($_POST['end'])) {
+		/*if(!empty($_POST['start']) && !empty($_POST['end'])) {
 			$previousDate = new Datetime($_POST['start']);
 			$currentDate  = new Datetime($_POST['end']);
-		}
+		}else {
+			$previousDate = new Datetime('2010-12-31'); //생활코딩이 처음 시작
+			$currentDate  = new Datetime('2011-01-01');
+		}*/
+
+		$startDateType = new Datetime($startDate);
+		$endDateType   = new Datetime($endDate);
+
 		if($this->user) {
-			$this->fql = "SELECT created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$startDate." AND created_time >= ".$endDate." LIMIT 50";
+			$this->fql = "SELECT created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$startDateType->format('U')." AND created_time >= ".$endDateType->format('U')." LIMIT 50";
+			$param = array('method' => 'fql.query', 'query' => $this->fql, );
+			return $this->facebook->api($params);
 		}
-
-		$param = array('method' => 'fql.query', 'query' => $this->fql, );
-		return $this->facebook->api($params);
-
-		
 	}
-
 }
 
-
-if(!empty($_POST['start']) && !empty($_POST['end'])){
-// This call will always work since we are fetching public data.
-	$previous_date = new Datetime($_POST['start']);
-	$date          = new Datetime($_POST['end']);
-}else{
-	$previous_date = new Datetime('2010-12-31');
-	$date          = new Datetime('2011-01-01');
-}
-$unix_date_format = $date->format('U');
-$unix_date_format_prev =  $previous_date->format('U');
-
- 
-    //Run Query
-    $result = $facebook->api($params);
-}
 ?>	
 <head>
     <meta charset="utf-8" />
@@ -90,8 +76,8 @@ $unix_date_format_prev =  $previous_date->format('U');
 	include_once 'include/nav.php';
 ?>
 
-    <?php if ($user): ?>
-      <a href="<?php echo 'common/logout.php';//echo $logoutUrl; ?>">Logout</a>
+    <?php if (true) : //$this->user): 사용자 객체가 있는지 여부 체크 ?>
+      <a href="<?php echo 'common/logout.php'; ?>">Logout</a>
     <?php else: ?>
       <div>
         <a href="<?php echo $loginUrl; ?>">Login with Facebook</a>
@@ -105,7 +91,7 @@ $unix_date_format_prev =  $previous_date->format('U');
 </form>
     <?php
 
-	if($user) {
+	if(false) {
 
 	foreach($result as $row){
 
@@ -130,7 +116,7 @@ $unix_date_format_prev =  $previous_date->format('U');
 
 	}
 	else {
-		echo "<h2>Command Line</h2>";
+		echo "<h2>명령줄</h2>";
 	}
     ?>
   </body>
