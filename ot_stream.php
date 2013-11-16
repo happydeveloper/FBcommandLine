@@ -79,16 +79,24 @@ if($ot_stream->user) {
 }
 ?>
 
-    <?php if ($ot_stream->user) : //$this->user): 사용자 객체가 있는지 여부 체크 ?>
-      <a href="<?php echo 'common/logout.php'; ?>">Logout</a>
+    <?php if ($ot_stream->user) : // 사용자 객체가 있는지 여부 체크 ?>
+      <a href="<?php echo 'common/logout.php'; ?>">얼굴북 나가기</a>
     <?php else: ?>
       <div>
-        <a href="<?php echo $ot_stream->facebook->getLoginUrl(); ?>">Login with Facebook</a>
+        <a href="<?php echo $ot_stream->facebook->getLoginUrl(); ?>">얼굴책 로그인</a>
       </div>
     <?php endif ?>
 <form action="ot_stream.php" method="POST">
-	<p><label>조회 시작일</label><input type="text" name="start" value="2013-11-15"/></p>
-        <p><label>조회 종료일</label><input type="text" name="end"   value="2013-11-16"/></p>
+<?php
+//날짜 셋팅
+$today = date('Y-m-d');
+$date = new DateTime($today);
+$date->add(new DateInterval('P1D'));
+echo $date->format('Y-m-d') . "\n";
+
+?>
+	<p><label>조회 시작일</label><input type="text" name="start" value="<?php echo date('Y-m-d') ?>" /></p>
+        <p><label>조회 종료일</label><input type="text" name="end"   value="<?php echo $date->format('Y-m-d') ?>"/></p>
  
         <input type="submit" />
 </form>
