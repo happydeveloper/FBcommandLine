@@ -1,5 +1,6 @@
 {
     "require": {
-        "phpunit/phpunit": "3.7.28"
+        "phpunit/phpunit": "3.7.28",
+	"facebook/php-sdk": "@stable"
     }
 }
