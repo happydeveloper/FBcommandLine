@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-	require_once 'lib/facebook.php';
+
+if (($loader = require_once __DIR__ . '/vendor/autoload.php') == null)  {
+  die('Vendor directory not found, Please run composer install.');
+}
+
 class Ot_stream
 {
 	//페이스북 객체 

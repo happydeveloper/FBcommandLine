@@ -4,7 +4,10 @@
 
 
 <?php
-	include 'lib/facebook.php';
+
+if (($loader = require_once __DIR__ . '/vendor/autoload.php') == null)  {
+  die('Vendor directory not found, Please run composer install.');
+}
 
 	$facebook = new Facebook(array(
 		'appId' => '541305629256667',
