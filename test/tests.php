@@ -6,9 +6,11 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	
 	public function testConstructor() {
 
+		if (!headers_sent()) session_start();
+
 		$_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
     		$_SERVER['REQUEST_URI'] = '/ot_stream.php';
-    		$ot_stream = new ot_stream();
+    		$ot_stream = new Ot_stream();
 		$this->assertNotEmpty($ot_stream);
 
 		return $ot_stream;
