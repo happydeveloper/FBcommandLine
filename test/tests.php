@@ -25,4 +25,11 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
     		 $this->assertEquals($login_url['host'], 'www.facebook.com');
     		 $this->assertEquals($login_url['path'], '/dialog/oauth');
 	}
+
+	/**
+	* @depends testConstructor
+	*/
+	public function testGetStream(ot_stream $stream) {
+		$this->assertNotNull($stream);
+	}
 }
