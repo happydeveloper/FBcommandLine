@@ -33,5 +33,16 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	*/
 	public function testGetStream(ot_stream $stream) {
 		$this->assertNotNull($stream);
+		$result;		
+		$startDateType = new Datetime('2013-11-21');
+		$endDateType   = new Datetime('2013-11-22');
+
+		if($stream) {
+			$stream->fql = "SELECT post_id, created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$endDateType->format('U')." AND created_time >= ".$startDateType->format('U')." LIMIT 50";
+		
+		$params = array('method' => 'fql.query', 'query' => $stream->fql, );
+		$result =  $stream->facebook->api($params);
+		}
+		$this->assertNotNull($result);
 	}
 }
