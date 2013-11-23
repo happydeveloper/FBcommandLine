@@ -32,7 +32,14 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	* @dataProvider provider
 	*/
 	public function testGetStream($startDate, $endDate) {
-		$this->assertNotNull($stream);
+		//생성자
+		$_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
+    		$_SERVER['REQUEST_URI'] = '/ot_stream.php';
+    		$stream = new Ot_stream();
+		$this->assertNotEmpty($stream);
+
+		
+		//결과를 저장시킴
 		$result;		
 		$startDateType = new Datetime($startDate);
 		$endDateType   = new Datetime($endDate);
