@@ -1,6 +1,5 @@
 <?php
 
-
 class ot_streamTestCase extends PHPUnit_Framework_TestCase 
 {
 	
@@ -28,14 +27,15 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
     		 $this->assertEquals($login_url['path'], '/dialog/oauth');
 	}
 
+
 	/**
-	* @depends testConstructor
+	* @dataProvider provider
 	*/
-	public function testGetStream(ot_stream $stream) {
+	public function testGetStream($startDate, $endDate) {
 		$this->assertNotNull($stream);
 		$result;		
-		$startDateType = new Datetime('2013-11-21');
-		$endDateType   = new Datetime('2013-11-22');
+		$startDateType = new Datetime($startDate);
+		$endDateType   = new Datetime($endDate);
 
 		if($stream) {
 			$stream->fql = "SELECT post_id, created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$endDateType->format('U')." AND created_time >= ".$startDateType->format('U')." LIMIT 50";
@@ -43,6 +43,17 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		$params = array('method' => 'fql.query', 'query' => $stream->fql, );
 		$result =  $stream->facebook->api($params);
 		}
+		//var_dump($result);
 		$this->assertNotNull($result);
+	}
+
+	/**
+	* @depends testConstructor
+	*/
+	public function provider()
+	{
+		return array(
+			array('2013-11-21', '2013-11-22')
+		);
 	}
 }
