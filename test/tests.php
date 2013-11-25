@@ -60,7 +60,8 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	public function provider()
 	{
 		return array(
-			array('2013-11-21', '2013-11-22')
+			array('2013-11-21', '2013-11-22'),
+			array('2013-11-25', '2013-11-26')
 		);
 	}
 }
