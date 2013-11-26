@@ -61,7 +61,9 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			array('2013-11-21', '2013-11-22'),
-			array('2013-11-25', '2013-11-26')
+			array('2013-11-25', '2013-11-26'),
+			array('2013-11-26', '2013-11-27'),
+			array('2013-11-27', '2013-11-28') //유효하지 않는 날짜 테스트
 		);
 	}
 }
