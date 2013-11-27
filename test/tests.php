@@ -66,4 +66,15 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 			array('2013-11-27', '2013-11-28') //유효하지 않는 날짜 테스트
 		);
 	}
+
+
+	/**
+	* FQL를 관리하는 클래스 - 코드의 유연성을 위해 하드 코딩 피함 - 나중에 FQL이 수정될 수 있음을 생각
+        */
+	public function testFqlManager()
+	{
+		$fql = new fqlManager();
+		$this->assertNotEmpty($fql);
+		return $fql;	
+	}
 }
