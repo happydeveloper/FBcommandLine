@@ -1,12 +1,16 @@
 <?php
 class fqlManager
 {
-	$fqlList = array();
-	$helpList = array();
+	public $fqlList;
 
-	function AddFQL($fqlString, $help) 
+	public function __construct()
 	{
-		global $fqlList;
-		global $helpList;
+		$this->fqlList = array();
+		$this->fqlList['GROUPS_WALL'] = "SELECT post_id, created_time, permalink, message FROM stream";
+	}
+
+	public function loadFql($key) 
+	{
+		return $this->fqlList[$key];
 	}
 }

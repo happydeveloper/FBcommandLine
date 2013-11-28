@@ -77,13 +77,31 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		$this->assertNotEmpty($fql);
 		return $fql;	
 	}
+	
+	/**
+	* FQL이 추가될때마다 테스트 리스트를 넣어서 체크
+	* @depends testFqlManager
+	*/
+	public function providerFqlCall($fql)
+	{
+		return array(
+			array($fql, "GROUPS_WALL"),
+			array($fql, "ME_WALL")
+		);
+	}
 
 	/**
 	* FQL 명령어를 불러오기
-	* @depends testFqlManager
+	* @dataProvider providerFqlCall
 	*/
-	public function testFqlMangerLoadCommand($fql)
+	public function testFqlMangerLoadCommand($fql, $cmd)
 	{
 		$this->assertNotNull($fql);
+		$actual = $fql->loadFql($cmd);
+
+		$expected = "SELECT post_id, created_time, permalink, message FROM stream";
+		$this->assertEquals($actual, $expected);
 	}
+
+	
 }
