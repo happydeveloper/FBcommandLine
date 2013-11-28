@@ -77,4 +77,13 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		$this->assertNotEmpty($fql);
 		return $fql;	
 	}
+
+	/**
+	* FQL 명령어를 불러오기
+	* @depends testFqlManager
+	*/
+	public function testFqlMangerLoadCommand($fql)
+	{
+		$this->assertNotNull($fql);
+	}
 }
