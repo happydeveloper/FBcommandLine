@@ -8,7 +8,7 @@ if (($loader = require_once __DIR__ . './../vendor/autoload.php') == null)  {
   die('Vendor directory not found, Please run composer install.');
 }
 
-class Ot_comment
+class Comment
 {
 	//페이스북 객체
 	public $facebook;
@@ -25,21 +25,20 @@ class Ot_comment
 
 	public function __construct($source_id) {
 
-	$this->facebook = new Facebook(array(
+		$this->facebook = new Facebook(array(
 		'appId' => '541305629256667',
 		'secret' => '95492b0183156cd27d69b1308980ef26',
 		'cookie' => true));
 
-	$this->user = $this->facebook->getUser();
-	var_dump($this->user);
-	if($this->user) {
-			try {
-				$this->user_profile = $this->facebook->api('/me');
-			} catch (FacebookApiException $e) {
-				error_log($e);
-				$this->user = null;
-			}
-		}	
+		$this->user = $this->facebook->getUser();
+		if($this->user) {
+				try {
+					$this->user_profile = $this->facebook->api('/me');
+				} catch (FacebookApiException $e) {
+					error_log($e);
+					$this->user = null;
+				}
+			}	
 	}
 
 	public function getComment($post_id=0){

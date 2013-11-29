@@ -1,80 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<?php
-//선언부
-if (($loader = require_once __DIR__ . '/vendor/autoload.php') == null)  {
-  die('Vendor directory not found, Please run composer install.');
-}
-
-//OnLoad 초기 로드시 작업
-require_once 'classes/basetaskfacebook.php';
-
-
-?>
-
-<?php
-//호출부
-$basetaskfacebook = new baseTaskFacebook();
- 
-if($basetaskfacebook->user) {
-  try {
-    // Proceed knowing you have a logged in user who's authenticated.
-    $user_profile = $basetaskfacebook->facebook->api('/me');
-  } catch (FacebookApiException $e) {
-   error_log($e);
-    $basetaskfacebook->user = null;
-  }
-}
-
-
-if($basetaskfacebook->user) {
-   //Create Query
-    $params = array(
-        'method' => 'fql.query',
-        'query' => "SELECT uid, pic, pic_square, name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = ".$basetaskfacebook->user.")",
-    );
- 
-    //Run Query
-    $result = $basetaskfacebook->facebook->api($params);
-}
-?>	
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
-    <title>FB_SEARCH</title>
-    <style>
-    </style>
-  </head>
-  <body>
+	<meta charset="UTF-8">
+	<title>검색기능</title>
+</head>
+<body>
 <?php
-	include_once 'include/nav.php';
+	include_once './include/nav.php';
 ?>
-
-    <?php if ($basetaskfacebook->user): ?>
-      <a href="<?php echo 'common/logout.php'; ?>">나가기</a>
-    <?php else: ?>
-      <div>
-        <a href="<?php echo $basetaskfacebook->getUserState(); ?>">얼굴책 들어가기</a>
-      </div>
-    <?php endif ?>
-
-    <?php
-	if($basetaskfacebook->user) {
-	foreach($result as $row){
-			foreach($row as $key=>$value){
-				if($key == 'pic') {
-					echo "<img src='". $value."' />";
-				}
-			}
- 
-	}
-	}
-	else {
-		echo "<h2>얼굴책 명령어 라인</h2>";
-	}
-    ?>
-  </body>
-
+	<pre>
+	페이스북 그룹  검색 기능
+	나중에 보기 기능 - 북카크
+	태깅 기능
+	</pre>
+</body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
 
-if (($loader = require_once __DIR__ . '/vendor/autoload.php') == null)  {
+if (($loader = require_once '../vendor/autoload.php') == null)  {
   die('Vendor directory not found, Please run composer install.');
 }
 
@@ -16,8 +16,8 @@ if (($loader = require_once __DIR__ . '/vendor/autoload.php') == null)  {
 
 <?php
 //OnLoad 초기 로드시 작업
-	require_once 'classes/ot_stream.php';
-	include_once 'include/nav.php';
+	require_once '../classes/ot_stream.php';
+	include_once '../include/nav.php';
 $ot_stream = new Ot_stream();
 if($ot_stream->user) {
 	if(!empty($_POST['start']) && !empty($_POST['end'])){
