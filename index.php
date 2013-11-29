@@ -2,7 +2,6 @@
 <html lang="en">
 
 
-
 <?php
 //선언부
 if (($loader = require_once __DIR__ . '/vendor/autoload.php') == null)  {
@@ -19,11 +18,6 @@ require_once 'classes/basetaskfacebook.php';
 //호출부
 $basetaskfacebook = new baseTaskFacebook();
  
-
-var_dump($basetaskfacebook->user);
-
-echo $basetaskfacebook->user;
-
 if($basetaskfacebook->user) {
   try {
     // Proceed knowing you have a logged in user who's authenticated.
@@ -59,7 +53,7 @@ if($basetaskfacebook->user) {
 ?>
 
     <?php if ($basetaskfacebook->user): ?>
-      <a href="<?php echo 'common/logout.php'; ?>">Logout</a>
+      <a href="<?php echo 'common/logout.php'; ?>">나가기</a>
     <?php else: ?>
       <div>
         <a href="<?php echo $basetaskfacebook->getUserState(); ?>">얼굴책 들어가기</a>
