@@ -4,6 +4,9 @@ if (($loader = require_once __DIR__ . './../vendor/autoload.php') == null)  {
   die('Vendor directory not found, Please run composer install.');
 }
 
+$base = realpath(dirname(__FILE__) . '/..');
+require_once "$base/classes/fqlmanager.php";
+
 class Ot_stream
 {
 	//페이스북 객체 
@@ -12,7 +15,6 @@ class Ot_stream
 	public $user;
 
 	public $fql;
-
 	public $result;
 
 	public function __construct() 
@@ -47,11 +49,13 @@ class Ot_stream
 
 	public function getStream($startDate, $endDate)
 	{
+		$fqlmanager = new fqlManager();
+
 		$startDateType = new Datetime($startDate);
 		$endDateType   = new Datetime($endDate);
 
 		if($this->user) {
-			$this->fql = "SELECT post_id, created_time, permalink, message FROM stream WHERE source_id = 174499879257223 AND created_time < ".$endDateType->format('U')." AND created_time >= ".$startDateType->format('U')." LIMIT 50";
+			$this->fql = $fqlmanager->loadFql("GROUPS_WALL")." WHERE source_id = 174499879257223 AND created_time < ".$endDateType->format('U')." AND created_time >= ".$startDateType->format('U')." LIMIT 50";
 		
 		$params = array('method' => 'fql.query', 'query' => $this->fql, );
 			echo "<br /> ".$this->fql;
