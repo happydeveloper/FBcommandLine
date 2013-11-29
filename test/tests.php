@@ -3,6 +3,8 @@
 class ot_streamTestCase extends PHPUnit_Framework_TestCase 
 {
 	
+	//====== ot_stream.php
+
 	public function testConstructor() {
 
 		if (!headers_sent()) session_start();
@@ -68,6 +70,8 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	}
 
 
+	//====== fqlmanager.php
+
 	/**
 	* FQL를 관리하는 클래스 - 코드의 유연성을 위해 하드 코딩 피함 - 나중에 FQL이 수정될 수 있음을 생각
         */
@@ -104,5 +108,17 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		$this->assertEquals($actual, $expected);
 	}
 
-	
+	//====== basefacebook.php
+
+	/**
+	* baseFacebook 클래스생성  테스트 -  페이스북 API를 이용하여 트랜잭션 할때 기본적인 작업을 담당
+	*/
+	public function testBaseTaskFacebook()
+	{
+		$basefacebook = new baseTaskFacebook();
+
+		$this->assertNotEmpty($basefacebook);
+
+		return $basefacebook;
+	}	
 }

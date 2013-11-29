@@ -1,5 +1,5 @@
 <?php
-class baseFacebook
+class baseTaskFacebook
 {
 	//페이스북 객체
 	public $facebook;
