@@ -120,5 +120,31 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		$this->assertNotEmpty($basefacebook);
 
 		return $basefacebook;
-	}	
+	}
+
+	/**
+	* @depends testBaseTaskFacebook
+	* 페이스북 객체가 생성 되었는지 확인
+	*/
+	public function testBaseTaskFacebook_verify_facebook_object(baseTaskFacebook $basefacebook)
+	{
+		$this->assertNotNull($basefacebook->facebook);
+		$this->assertNotNull($basefacebook->user);
+	}
+
+	/**
+	* @depends testBaseTaskFacebook
+	* 로그인 URL 가져오기
+	*/	
+	public function testBaseTaskFacebookGetState(baseTaskFacebook $basefacebook)
+	{
+
+		 $_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
+    		 $_SERVER['REQUEST_URI'] = '/ot_stream.php';
+    		 $login_url = parse_url($basefacebook->getUserState());
+    		 $this->assertEquals($login_url['scheme'], 'https');
+    		 $this->assertEquals($login_url['host'], 'www.facebook.com');
+		
+		 var_dump($login_url);
+	} 
 }
