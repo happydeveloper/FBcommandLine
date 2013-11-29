@@ -82,11 +82,12 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	* FQL이 추가될때마다 테스트 리스트를 넣어서 체크
 	* @depends testFqlManager
 	*/
-	public function providerFqlCall($fql)
+	public function providerFqlCall()
 	{
+		$fql = new fqlmanager();
 		return array(
-			array($fql, "GROUPS_WALL"),
-			array($fql, "ME_WALL")
+			array($fql, "GROUPS_WALL", "SELECT post_id, created_time, permalink, message FROM stream"), //성공케이스 - 그룹의 담벼락
+			array($fql, "ME_WALL", "Can not load fqlString, may be do not setting FQLSTRING about CMD") //실패케이스
 		);
 	}
 
@@ -94,12 +95,12 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	* FQL 명령어를 불러오기
 	* @dataProvider providerFqlCall
 	*/
-	public function testFqlMangerLoadCommand($fql, $cmd)
+	public function testFqlMangerLoadCommand($fql, $cmd, $expectedMessage)
 	{
 		$this->assertNotNull($fql);
 		$actual = $fql->loadFql($cmd);
-
-		$expected = "SELECT post_id, created_time, permalink, message FROM stream";
+		
+		$expected = $expectedMessage;
 		$this->assertEquals($actual, $expected);
 	}
 

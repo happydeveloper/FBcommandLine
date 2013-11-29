@@ -11,6 +11,13 @@ class fqlManager
 
 	public function loadFql($key) 
 	{
-		return $this->fqlList[$key];
+		if(isset($this->fqlList[$key]))
+		{
+			return $this->fqlList[$key];
+		}
+		else
+		{
+			return "Can not load fqlString, may be do not setting FQLSTRING about CMD";
+		}
 	}
 }
