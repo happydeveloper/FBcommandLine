@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 $app = new \Slim\Slim();
 $app->config(array(
     'debug' => true,
-    'templates.path' => 'templates'
+    'templates.path' => 'views'
 ));
 
 $app->get('/', function() use ($app) {
