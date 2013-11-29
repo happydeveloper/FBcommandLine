@@ -10,7 +10,7 @@ if (($loader = require_once '../vendor/autoload.php') == null)  {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
-    <title>fbCommandLine</title>
+    <title> 페이스북 그룹 글 </title>
   </head>
   <body>
 
@@ -18,14 +18,14 @@ if (($loader = require_once '../vendor/autoload.php') == null)  {
 //OnLoad 초기 로드시 작업
 	require_once '../classes/ot_stream.php';
 	include_once '../include/nav.php';
-$ot_stream = new Ot_stream();
-if($ot_stream->user) {
-	if(!empty($_POST['start']) && !empty($_POST['end'])){
-		$ot_stream->getStream($_POST['start'], $_POST['end']);
-	} else {
-		$ot_stream->getStream('2010-12-31', '2011-01-01');
+	$ot_stream = new Ot_stream();
+	if($ot_stream->user) {
+		if(!empty($_POST['start']) && !empty($_POST['end'])){
+			$ot_stream->getStream($_POST['start'], $_POST['end']);
+		} else {
+			$ot_stream->getStream('2010-12-31', '2011-01-01');
+		}
 	}
-}
 ?>
 
     <?php if ($ot_stream->user) : // 사용자 객체가 있는지 여부 체크 ?>
@@ -55,7 +55,7 @@ echo $date->format('Y-m-d') . "\n";
 
 	foreach($ot_stream->result as $row){
 
-			echo "<article>";
+			echo "<div> <article>";
 			foreach($row as $key=>$value){
 				if($key == 'post_id') {
 					echo "<span>".$value." 댓글 가져오기 </span>";
@@ -73,7 +73,7 @@ echo $date->format('Y-m-d') . "\n";
 					echo "<p class='message'>".$value."</p>";
 				}
 			}
- 			echo "</article>";
+ 			echo "</article> </div>";
 	}
 
 	}

@@ -58,7 +58,10 @@ class Ot_stream
 			$this->fql = $fqlmanager->loadFql("GROUPS_WALL")." WHERE source_id = 174499879257223 AND created_time < ".$endDateType->format('U')." AND created_time >= ".$startDateType->format('U')." LIMIT 50";
 		
 		$params = array('method' => 'fql.query', 'query' => $this->fql, );
-			echo "<br /> ".$this->fql;
+			
+if(false) {
+echo "<br /> ".$this->fql;
+}
 			$this->result =  $this->facebook->api($params);
 		}
 	}
