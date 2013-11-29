@@ -3,6 +3,10 @@
 require 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
+$app->config(array(
+    'debug' => true,
+    'templates.path' => 'templates'
+));
 
 $app->get('/', function() use ($app) {
     $app->render('_index.php');
@@ -16,6 +20,7 @@ $app->get('/friends', function() use ($app) {
 $app->map('/groups', function() use ($app) {
 	$app->render('ot_stream.php');
 })->via('GET', 'POST'); 
+
 $app->run();
 
 ?>
