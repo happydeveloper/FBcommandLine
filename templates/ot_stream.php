@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
 
-if (($loader = require_once '../vendor/autoload.php') == null)  {
+if (($loader = require_once 'vendor/autoload.php') == null)  {
   die('Vendor directory not found, Please run composer install.');
 }
 
@@ -16,8 +16,8 @@ if (($loader = require_once '../vendor/autoload.php') == null)  {
 
 <?php
 //OnLoad 초기 로드시 작업
-	require_once '../classes/ot_stream.php';
-	include_once '../include/nav.php';
+	require_once 'classes/ot_stream.php';
+	include_once 'nav.php';
 	$ot_stream = new Ot_stream();
 	if($ot_stream->user) {
 		if(!empty($_POST['start']) && !empty($_POST['end'])){
@@ -35,7 +35,7 @@ if (($loader = require_once '../vendor/autoload.php') == null)  {
         <a href="<?php echo $ot_stream->facebook->getLoginUrl(); ?>">얼굴책 로그인</a>
       </div>
     <?php endif ?>
-<form action="ot_stream.php" method="POST">
+<form action="./groups"  method="POST">
 <?php
 //날짜 셋팅
 $today = date('Y-m-d');

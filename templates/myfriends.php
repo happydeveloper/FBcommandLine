@@ -4,12 +4,12 @@
 
 <?php
 //선언부
-if (($loader = require_once '../vendor/autoload.php') == null)  {
+if (($loader = require_once 'vendor/autoload.php') == null)  {
   die('Vendor directory not found, Please run composer install.');
 }
 
 //OnLoad 초기 로드시 작업
-require_once '../classes/basetaskfacebook.php';
+require_once 'classes/basetaskfacebook.php';
 
 
 ?>
@@ -49,7 +49,7 @@ if($basetaskfacebook->user) {
   </head>
   <body>
 <?php
-	include_once '../include/nav.php';
+	include_once 'nav.php';
 ?>
 
     <?php if ($basetaskfacebook->user): ?>

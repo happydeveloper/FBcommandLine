@@ -1,17 +1,21 @@
 <?php
+
 require 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
-$app->get('/', function(){
-    echo "Home Page";
+$app->get('/', function() use ($app) {
+    $app->render('_index.php');
 }); 
  
-$app->get('/testPage', function() use ($app) {
+$app->get('/friends', function() use ($app) {
     $app->render('myfriends.php');
     //echo "Test";
 });
- 
+
+$app->map('/groups', function() use ($app) {
+	$app->render('ot_stream.php');
+})->via('GET', 'POST'); 
 $app->run();
 
 ?>
