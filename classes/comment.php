@@ -8,9 +8,12 @@ if (($loader = require_once __DIR__ . './../vendor/autoload.php') == null)  {
   die('Vendor directory not found, Please run composer install.');
 }
 
+$base = realpath(dirname(__FILE__) . '/..');
+require_once "$base/classes/fqlmanager.php";
+
 class Comment
 {
-	//페이스북 객체
+	
 	public $facebook;
 	
 	//사용자 아이디 가져온다
@@ -41,17 +44,6 @@ class Comment
 			}	
 	}
 
-	public function getComment($post_id=0){
-		if($this->user) {
-			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
-			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
-			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
-		$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
-			$params = array('method' => 'fql.query', 'query' => $this->fql, );
-			return $this->facebook->api($params);
-		}	
-	}
-
 	public function getUserState(){
 		echo 'user 상태 여부 가져오기';
 		if($this->user) {
@@ -60,6 +52,18 @@ class Comment
 			return $loginUrl = $this->facebook->getLoginUrl();
 		}
 	}
+
+	public function getComment($post_id=0){
+
+		$fqlmanager = new fqlManager();
+
+		if($this->user) {
+			$this->fql = $fqlmanager->loadFql("COMMENT")."'".$post_id."'";
+			$params = array('method' => 'fql.query', 'query' => $this->fql, );
+			return $this->facebook->api($params);
+		}	
+	}
+
 }
 
 ?>
