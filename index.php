@@ -21,6 +21,10 @@ $app->map('/groups', function() use ($app) {
 	$app->render('ot_stream.php');
 })->via('GET', 'POST'); 
 
+$app->map('/comment', function() use($app) {
+	echo "comment 댓글가져오기";
+})->via('GET', 'POST');
+
 $app->run();
 
 ?>
