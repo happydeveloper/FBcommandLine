@@ -1,9 +1,4 @@
 <?php
-/**
-* input-> source_id
-* output -> comment
-*/
-
 if (($loader = require_once __DIR__ . './../vendor/autoload.php') == null)  {
   die('Vendor directory not found, Please run composer install.');
 }
@@ -13,18 +8,10 @@ require_once "$base/classes/fqlmanager.php";
 
 class Comment
 {
-	
 	public $facebook;
-	
-	//사용자 아이디 가져온다
 	public $user;
-
-	//사용자 프로필
-	public $user_profile;
-
-	//FQL 쿼리
 	public $fql;
-
+	public $result;
 
 	public function __construct() {
 
@@ -45,7 +32,6 @@ class Comment
 	}
 
 	public function getUserState(){
-		echo 'user 상태 여부 가져오기';
 		if($this->user) {
 			return $logoutUrl = $this->facebook->getLogoutUrl();
 		} else {
@@ -53,15 +39,12 @@ class Comment
 		}
 	}
 
-	public function getComment($post_id=0){
-
-		$fqlmanager = new fqlManager();
-
+	public function getComment($post_id)
+	{
 		if($this->user) {
-			$this->fql = $fqlmanager->loadFql("COMMENT")."'".$post_id."'";
+			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = ".$post_id;
 			$params = array('method' => 'fql.query', 'query' => $this->fql, );
-			return $this->facebook->api($params);
-		}	
+			$this->result = $this->facebook->api($params);
+		}
 	}
-
 }

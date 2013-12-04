@@ -52,7 +52,7 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		$params = array('method' => 'fql.query', 'query' => $stream->fql, );
 		$result =  $stream->facebook->api($params);
 		}
-		var_dump($result);
+		//var_dump($result);
 		$this->assertNotNull($result);
 	}
 
@@ -91,7 +91,8 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		$fql = new fqlmanager();
 		return array(
 			array($fql, "GROUPS_WALL", "SELECT post_id, created_time, permalink, message FROM stream"), //성공케이스 - 그룹의 담벼락
-			array($fql, "ME_WALL", "Can not load fqlString, may be do not setting FQLSTRING about CMD"), //실패케이스
+			array($fql, "ME_WALL", "Can not load fqlString, may be do not setting FQLSTRING about CMD") //실패케이스
+					,
 			array($fql, "COMMENT", "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = ")
 		);
 	}
@@ -104,6 +105,7 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	{
 		$this->assertNotNull($fql);
 		$actual = $fql->loadFql($cmd);
+		var_dump($actual);
 		$expected = $expectedMessage;
 		$this->assertEquals($actual, $expected);
 	}
@@ -116,7 +118,9 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	public function testBaseTaskFacebook()
 	{
 		$basefacebook = new baseTaskFacebook();
+
 		$this->assertNotEmpty($basefacebook);
+
 		return $basefacebook;
 	}
 
@@ -151,29 +155,33 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	*/
 	public function testComment()
 	{
+		
+		$_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
+    		$_SERVER['REQUEST_URI'] = '/ot_stream.php';
 		$comment = new Comment();
-		$this->assertNotNull($comment->facebook);
-		$this->assertNotNull($comment->user);
+		$this->assertNotNull($comment);
+		var_dump($comment);
 		return $comment;
 	}
 
 	/**
-	* 
+	* @depends testComment
 	*/
 	public function testCommentGetComment()
 	{
-    		$comment = new Comment();
-
-		$this->assertNotEmpty($comment);
-		//결과를 저장시킴
-		$result;		
-
-		if($comment) {
-		$comment->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '174499879257223_677330778974128'";
-		$params = array('method' => 'fql.query', 'query' => $comment->fql, );
-		$result =  $comment->facebook->api($params);
+		$_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
+    		$_SERVER['REQUEST_URI'] = '/comment.php';
+		$comment = new Comment();
+			if($comment) {
+echo "TEST START \n";
+var_dump($comment->fql);
+		
+ $comment->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = 174499879257223_677330778974128";
+			$result = $comment->getComment("174499879257223_677330778974128");
+var_dump($comment->fql);
+			var_dump($result);
 		}
-		var_dump($result);
-		$this->assertNotNull($result);
+echo "TEST END";
+		//$this->assertNotNull($result);
 	}
 }
