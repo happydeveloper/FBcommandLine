@@ -26,7 +26,7 @@ class Comment
 	public $fql;
 
 
-	public function __construct($source_id) {
+	public function __construct() {
 
 		$this->facebook = new Facebook(array(
 		'appId' => '541305629256667',
@@ -65,6 +65,3 @@ class Comment
 	}
 
 }
-
-?>
-

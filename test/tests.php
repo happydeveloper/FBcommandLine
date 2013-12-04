@@ -149,4 +149,17 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		
 		 var_dump($login_url);
 	} 
+
+	/**
+	* comment 클래스 생성 테스트
+	*/
+	public function testCommnet()
+	{
+		
+		$_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
+    		$_SERVER['REQUEST_URI'] = '/ot_stream.php';
+		$comment = new Comment();
+		$this->assertNotNull($comment);
+		return $comment;
+	}
 }
