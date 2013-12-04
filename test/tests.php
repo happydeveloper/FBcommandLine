@@ -158,9 +158,9 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* 
+	* @dataProvider post_idProvider 
 	*/
-	public function testCommentGetComment()
+	public function testCommentGetComment($post_id)
 	{
     		$comment = new Comment();
 
@@ -169,11 +169,27 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 		$result;		
 
 		if($comment) {
-		$comment->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '174499879257223_677330778974128'";
+		$comment->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
 		$params = array('method' => 'fql.query', 'query' => $comment->fql, );
 		$result =  $comment->facebook->api($params);
 		}
 		var_dump($result);
 		$this->assertNotNull($result);
+	}
+
+	public function post_idProvider()
+	{
+		return array(
+			array('174499879257223_677832208923985'),
+      			array('174499879257223_677808422259697'),
+      			array('174499879257223_677809988926207'),
+      			array('174499879257223_677624362278103'),
+      			array('174499879257223_677830205590852'),
+      			array('174499879257223_677330778974128'),
+      			array('174499879257223_677826072257932'),
+      			array('174499879257223_677686678938538'),
+      			array('174499879257223_677785002262039'),
+      			array('174499879257223_677441018963104')
+		);
 	}
 }
