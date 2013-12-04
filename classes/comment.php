@@ -42,9 +42,9 @@ class Comment
 	public function getComment($post_id)
 	{
 		if($this->user) {
-			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = ".$post_id;
+			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
 			$params = array('method' => 'fql.query', 'query' => $this->fql, );
-			$this->result = $this->facebook->api($params);
+			return $this->result = $this->facebook->api($params);
 		}
 	}
 }

@@ -1,30 +1,36 @@
+<html>
+<!DOCTYPE html>
 <?php
-if (($loader = require_once __DIR__ . '/vendor/autoload.php') == null)  {
+
+if (($loader = require_once 'vendor/autoload.php') == null)  {
   die('Vendor directory not found, Please run composer install.');
 }
 
-$base = realpath(dirname(__FILE__));
+?>	
 
-require_once "$base/classes/comment.php";
-?>
-
-<html>
 <head>
-	<meta charset="utf-8" />
-	<title>댓글 가져오기</title>
-</head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
+    <title> 페이스북 그룹댓  글 </title>
+  </head>
 <body>
+
+<?php
+	require_once 'classes/comment.php';
+	include_once 'nav.php';
+?>
 	<p>댓글 가져오기</p>
 	<?php
 		$comment = new Comment();
-		echo "<br />";
-		echo $comment->getUserState();
-		echo "<br />";
+		if($comment->user) {
+			echo "<br />";
+			echo $comment->getUserState();
+			echo "<br />";
 
-		if(isset($_GET['post_id'])) {
-		var_dump($comment->getComment($_GET['post_id'])); //POST변경 예정
-		} else {
-		var_dump($comment->getComment());
+			if(isset($_GET['post_id'])) {
+			var_dump($comment->getComment($_GET['post_id'])); //POST변경 예정
+			} else {
+			}
 		}
 	?>
 </body>

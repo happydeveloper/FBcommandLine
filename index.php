@@ -22,7 +22,7 @@ $app->map('/groups', function() use ($app) {
 })->via('GET', 'POST'); 
 
 $app->map('/comment', function() use($app) {
-	echo "comment 댓글가져오기";
+	$app->render('ot_comment.php');
 })->via('GET', 'POST');
 
 $app->run();
