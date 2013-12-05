@@ -23,6 +23,8 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 	<?php
 		$comment = new Comment();
 		if($comment->user) {
+			echo "<a href='common/logout.php'>나가기</a>";
+		} else {
 			echo "<br />";
 			echo $comment->getUserState();
 			echo "<br />";
