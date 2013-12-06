@@ -6,7 +6,9 @@
 	$url="http://ucloud.duru.pe.kr";
 ?>
                         <li><a href=<?php echo $url."/fcmd/friends" ?> >내 페이스북 친구들 얼굴들</a></li>
-                        <li><a href=<?php echo $url."/fcmd/groups" ?> >생활코딩 페이스북 그룹</a></li>
+                        <li><a href=<?php echo $url."/fcmd/codingeverybody" ?> >생활코딩</a></li>
+
+                        <li><a href=<?php echo $url."/fcmd/engfordev" ?> >개발자영어</a></li>
                 </ul>
         </div>
 </nav>

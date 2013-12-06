@@ -17,9 +17,13 @@ $app->get('/friends', function() use ($app) {
     //echo "Test";
 });
 
-$app->map('/groups', function() use ($app) {
+$app->map('/codingeverybody', function() use ($app) {
 	$app->render('ot_stream.php');
 })->via('GET', 'POST'); 
+
+$app->map('/engfordev', function() use ($app) {
+	$app->render('engfordev.php');
+})->via('GET', 'POST');
 
 $app->map('/comment', function() use($app) {
 	$app->render('ot_comment.php');
