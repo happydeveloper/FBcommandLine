@@ -60,20 +60,29 @@ if($basetaskfacebook->user) {
         <a href="<?php echo $basetaskfacebook->getUserState(); ?>">얼굴책 들어가기</a>
       </div>
     <?php endif ?>
-
+    <hr />
     <?php
 	if($basetaskfacebook->user) {
 	foreach($result as $row){
+	$name ="";
+	$pic = ""; 
+	$uid = "";
 			foreach($row as $key=>$value){
+				if($key == 'name') {
+					$name = $value;
+				}
 				if($key == 'pic') {
-					echo "<img src='". $value."' />";
+					$pic = $value;
+				}
+				if($key == 'uid') {
+					$uid = $value;
 				}
 			}
- 
+				echo "<a href='https://www.facebook.com/".$uid."'><img alt='".$name."' class='friends' src='".$pic."' ></a>";
 	}
 	}
 	else {
-		echo "<h2>얼굴책 명령어 라인</h2>";
+		echo "<span>얼굴책 명령어 라인</span>";
 	}
     ?>
   </body>
