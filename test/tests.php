@@ -90,9 +90,11 @@ class codingeverybodyTestCase extends PHPUnit_Framework_TestCase
 	{
 		$fql = new fqlmanager();
 		return array(
-			array($fql, "GROUPS_WALL", "SELECT post_id, created_time, permalink, message FROM stream"), //성공케이스 - 그룹의 담벼락
+			array($fql, "GROUPS_WALL", "SELECT post_id, created_time, permalink, message FROM stream WHERE source_id = "), //성공케이스 - 그룹의 담벼락
 			array($fql, "ME_WALL", "Can not load fqlString, may be do not setting FQLSTRING about CMD"), //실패케이스
-			array($fql, "COMMENT", "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = ")
+			array($fql, "COMMENT", "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = "),
+			array($fql, "MY_FRIENDS", "SELECT uid, pic, pic_square, name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = ")
+
 		);
 	}
 

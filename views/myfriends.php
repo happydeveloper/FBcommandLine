@@ -10,7 +10,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 
 //OnLoad 초기 로드시 작업
 require_once 'classes/basetaskfacebook.php';
-
+require_once 'classes/fqlmanager.php';
 
 ?>
 
@@ -31,9 +31,10 @@ if($basetaskfacebook->user) {
 
 if($basetaskfacebook->user) {
    //Create Query
+    $fql = new fqlManager();
     $params = array(
         'method' => 'fql.query',
-        'query' => "SELECT uid, pic, pic_square, name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = ".$basetaskfacebook->user.")",
+        'query' => $fql->loadFql('MY_FRIENDS').$basetaskfacebook->user.")",
     );
  
     //Run Query

@@ -18,7 +18,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 //OnLoad 초기 로드시 작업
 	require_once 'classes/engfordev.php';
 	include_once 'nav.php';
-	$engfordev = new Ot_stream();
+	$engfordev = new Engfordev();
 	if($engfordev->user) {
 		if(!empty($_POST['start']) && !empty($_POST['end'])){
 			$engfordev->getStream($_POST['start'], $_POST['end']);
