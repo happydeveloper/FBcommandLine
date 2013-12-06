@@ -1,28 +1,28 @@
 <?php
 
-class ot_streamTestCase extends PHPUnit_Framework_TestCase 
+class codingeverybodyTestCase extends PHPUnit_Framework_TestCase 
 {
 	
-	//====== ot_stream.php
+	//====== codingeverybody.php
 
 	public function testConstructor() {
 
 		if (!headers_sent()) session_start();
 
 		$_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
-    		$_SERVER['REQUEST_URI'] = '/ot_stream.php';
-    		$ot_stream = new Ot_stream();
-		$this->assertNotEmpty($ot_stream);
+    		$_SERVER['REQUEST_URI'] = '/codingeverybody.php';
+    		$codingeverybody = new Codingeverybody();
+		$this->assertNotEmpty($codingeverybody);
 
-		return $ot_stream;
+		return $codingeverybody;
   	}
 
 	/**
 	* @depends testConstructor
 	*/	
-	public function testGetUserState(ot_stream $stream){
+	public function testGetUserState(codingeverybody $stream){
 		 $_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
-    		 $_SERVER['REQUEST_URI'] = '/ot_stream.php';
+    		 $_SERVER['REQUEST_URI'] = '/codingeverybody.php';
     		 $login_url = parse_url($stream->getUserState());
     		 $this->assertEquals($login_url['scheme'], 'https');
     		 $this->assertEquals($login_url['host'], 'www.facebook.com');
@@ -36,8 +36,8 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	public function testGetStream($startDate, $endDate) {
 		//생성자
 		$_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
-    		$_SERVER['REQUEST_URI'] = '/ot_stream.php';
-    		$stream = new Ot_stream();
+    		$_SERVER['REQUEST_URI'] = '/codingeverybody.php';
+    		$stream = new Codingeverybody();
 		$this->assertNotEmpty($stream);
 
 		
@@ -138,7 +138,7 @@ class ot_streamTestCase extends PHPUnit_Framework_TestCase
 	{
 
 		 $_SERVER['HTTP_HOST'] = 'ucloud.duru.pe.kr';
-    		 $_SERVER['REQUEST_URI'] = '/ot_stream.php';
+    		 $_SERVER['REQUEST_URI'] = '/codingeverybody.php';
     		 $login_url = parse_url($basefacebook->getUserState());
     		 $this->assertEquals($login_url['scheme'], 'https');
     		 $this->assertEquals($login_url['host'], 'www.facebook.com');

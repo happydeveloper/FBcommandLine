@@ -16,19 +16,19 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 
 <?php
 //OnLoad 초기 로드시 작업
-	require_once 'classes/ot_stream.php';
+	require_once 'classes/codingeverybody.php';
 	include_once 'nav.php';
-	$ot_stream = new Ot_stream();
-	if($ot_stream->user) {
+	$codingeverybody = new Codingeverybody();
+	if($codingeverybody->user) {
 		if(!empty($_POST['start']) && !empty($_POST['end'])){
-			$ot_stream->getStream($_POST['start'], $_POST['end']);
+			$codingeverybody->getStream($_POST['start'], $_POST['end']);
 		} else {
-			$ot_stream->getStream('2010-12-31', '2011-01-01');
+			$codingeverybody->getStream('2010-12-31', '2011-01-01');
 		}
 	}
 ?>
 
-    <?php if ($ot_stream->user) : // 사용자 객체가 있는지 여부 체크 ?>
+    <?php if ($codingeverybody->user) : // 사용자 객체가 있는지 여부 체크 ?>
       <a href="<?php echo 'common/logout.php'; ?>">얼굴북 나가기</a>
 
 
@@ -55,15 +55,15 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 
     <?php else: ?>
       <div>
-        <a href="<?php echo $ot_stream->facebook->getLoginUrl(); ?>">얼굴책 로그인</a>
+        <a href="<?php echo $codingeverybody->facebook->getLoginUrl(); ?>">얼굴책 로그인</a>
       </div>
     <?php endif ?>
 <hr />
     <?php
 
-	if($ot_stream->user &&  $ot_stream->result != null) {
+	if($codingeverybody->user &&  $codingeverybody->result != null) {
 
-	foreach($ot_stream->result as $row){
+	foreach($codingeverybody->result as $row){
 
 			echo "<div> <article>";
 			foreach($row as $key=>$value){

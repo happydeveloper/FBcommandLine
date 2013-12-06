@@ -11,7 +11,7 @@ if (($loader = require_once __DIR__ . './../vendor/autoload.php') == null)  {
 $base = realpath(dirname(__FILE__) . '/..');
 require_once "$base/classes/fqlmanager.php";
 
-class Ot_stream
+class Codingeverybody
 {
 	//페이스북 객체 
 	public $facebook;
