@@ -18,7 +18,7 @@ $app->get('/friends', function() use ($app) {
 });
 
 $app->map('/codingeverybody', function() use ($app) {
-	$app->render('ot_stream.php');
+	$app->render('codingeverybody.php');
 })->via('GET', 'POST'); 
 
 $app->map('/engfordev', function() use ($app) {
