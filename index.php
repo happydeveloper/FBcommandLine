@@ -65,8 +65,14 @@ function getStream() {
 	  	//$request = Slim::getInstance()->request();
  	 	//$stream = json_decode($request->getBody());
   		$sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key) values ('message', 'message_tag', 'permalik', 'source_id', NOW(), NOW(), 'post_id', 'filter_key');";
+
+  	//	$sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key) values (:message, :message_tag, :permalik, :source_id, :created_time, :created, :post_id, :filter_key);";
   		try {
 		$db = getConnection();
+
+		//DTO에 담아서 처리 함
+		//하루 단위로 처리함
+
 		$stmt = $db->prepare($sql);
 	/*	$stmt->bindParam("message", $wine->name);
 		$stmt->bindParam("message_tags", $wine->grapes);
@@ -83,5 +89,4 @@ function getStream() {
 			echo '{"error":{"text":'. $e->getMessage() .'}}';
 		}
 	}
-
 ?>
