@@ -1,0 +1,40 @@
+<?php #codingeverybodyintodb
+class codingeverybodyintodb
+{
+	public $db;
+	public $message = "message into database 한글 입력 테스트";
+	public $tag = "tag into datatabse 태그 입력";
+	public $permalink = "peramlink into databases";
+	public $source_id = "source_id";
+	public $create_time; 
+	public $created; 
+	public $post_id = "post_id into database";
+	public $filter_key = "filter into database";
+
+  	public $sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key) values (:message, :message_tag, :permalink, :source_id, :created_time, :created, :post_id, :filter_key);";
+
+
+	public function __construct($db)
+	{
+		$this->db = $db;
+		$this->create_time = date("Y-m-d H:i:s");
+		$this->created = date("Y-m-d H:i:s");
+	}
+
+	public function insert()
+	{
+		$stmt = $this->db->prepare($this->sql);
+		$stmt->bindParam(':message', $this->message, PDO::PARAM_STR);
+		$stmt->bindParam(":message_tag", $this->tag, PDO::PARAM_STR);
+		$stmt->bindParam(":permalink", $this->permalink, PDO::PARAM_STR);
+		$stmt->bindParam(":source_id", $this->source_id, PDO::PARAM_STR);
+		$stmt->bindParam(":created_time", $this->create_time, PDO::PARAM_STR);
+		$stmt->bindParam(":created", $this->created, PDO::PARAM_STR);
+		$stmt->bindParam(":post_id", $this->post_id, PDO::PARAM_STR);
+		$stmt->bindParam(":filter_key",$this->filter_key, PDO::PARAM_STR);
+		$stmt->execute();
+		$stmt->id = $this->db->lastInsertId();
+		$db = null;
+	}
+}
+?>
