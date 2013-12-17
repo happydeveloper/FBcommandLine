@@ -62,6 +62,13 @@ function getStream() {
     }
 }
 
+function addDate($YMD)
+{
+$date = date_create($YMD);
+date_add($date, date_interval_create_from_date_string('1 days'));
+return  date_format($date, 'Y-m-d');
+}
+
 function pushStream() {
   		try {
 		//DTO에 담아서 처리 함
@@ -72,7 +79,7 @@ function pushStream() {
  		$codingeverybody = new Codingeverybody();
 		if($codingeverybody->user) {
 			echo "<a href=\"<?php echo 'common\/logout.php'; ?>\">logout</a>";
-                       	$codingeverybody->getStream('2010-12-31', '2011-01-01');
+                       	$codingeverybody->getStream('2010-12-31', addDate('2010-12-31'));
 				foreach($codingeverybody->result as $row){	
 				$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
 				foreach($row as $key=>$value){	
