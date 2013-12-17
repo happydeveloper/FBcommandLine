@@ -70,13 +70,13 @@ function getStream() {
 
 		//DTO에 담아서 처리 함
 		//하루 단위로 처리함
-		$message = "message into database";
+		$message = "message into database 한글 입력 테스트";
 
-		$tag = "tag into datatabse";
+		$tag = "tag into datatabse 태그 입력";
 		$permalink = "peramlink into databases";
 		$source_id = "source_id";
-		$create_time = "NOW()";
-		$created = "NOW()";
+		$create_time = date("Y-m-d H:i:s");
+		$created = date("Y-m-d H:i:s");
 		$post_id = "post_id into database";
 		$filter_key = "filter into database";
 		$stmt = $db->prepare($sql);
