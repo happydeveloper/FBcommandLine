@@ -40,7 +40,6 @@ function getConnection()
 	$dbuser = "root";
 	$dbpass = "1111";
 	$dbname = "fb_archive";
-	//$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 	$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname;charset=utf8", $dbuser, $dbpass,
                     array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
 
@@ -64,23 +63,44 @@ function getStream() {
 	function pushStream() {
 	  	//$request = Slim::getInstance()->request();
  	 	//$stream = json_decode($request->getBody());
-  		$sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key) values ('message', 'message_tag', 'permalik', 'source_id', NOW(), NOW(), 'post_id', 'filter_key');";
 
-  	//	$sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key) values (:message, :message_tag, :permalik, :source_id, :created_time, :created, :post_id, :filter_key);";
+  		$sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key) values (:message, :message_tag, :permalink, :source_id, :created_time, :created, :post_id, :filter_key);";
   		try {
 		$db = getConnection();
 
 		//DTO에 담아서 처리 함
 		//하루 단위로 처리함
+		$message = "message into database";
 
+		$tag = "tag into datatabse";
+		$permalink = "peramlink into databases";
+		$source_id = "source_id";
+		$create_time = "NOW()";
+		$created = "NOW()";
+		$post_id = "post_id into database";
+		$filter_key = "filter into database";
 		$stmt = $db->prepare($sql);
-	/*	$stmt->bindParam("message", $wine->name);
-		$stmt->bindParam("message_tags", $wine->grapes);
-		$stmt->bindParam("permalink", $wine->country);
-		$stmt->bindParam("source_id", $wine->region);
-		$stmt->bindParam("created_time", $wine->year);
-		$stmt->bindParam("created", 
-	*/	
+		
+
+
+	//	$stmt->bindParam(":message", 'message');
+
+		$stmt->bindParam(':message', $message, PDO::PARAM_STR);
+
+		$stmt->bindParam(":message_tag", $tag, PDO::PARAM_STR);
+
+		$stmt->bindParam(":permalink", $permalink, PDO::PARAM_STR);
+
+		$stmt->bindParam(":source_id", $source_id, PDO::PARAM_STR);
+
+		$stmt->bindParam(":created_time", $create_time, PDO::PARAM_STR);
+
+		$stmt->bindParam(":created", $created, PDO::PARAM_STR);
+
+		$stmt->bindParam(":post_id", $post_id, PDO::PARAM_STR);
+
+		$stmt->bindParam(":filter_key",$filter_key, PDO::PARAM_STR);
+		
 		$stmt->execute();
 		$stmt->id = $db->lastInsertId();
 		$db = null;
