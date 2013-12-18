@@ -55,7 +55,7 @@ class Codingeverybody
 		$startDateType = new Datetime($startDate);
 		$endDateType   = new Datetime($endDate);
 		if($this->user) {
-			$this->fql = $fqlmanager->loadFql("GROUPS_WALL").$this->groupid." AND created_time < ".$endDateType->format('U')." AND created_time >= ".$startDateType->format('U')." LIMIT 50";
+			$this->fql = $fqlmanager->loadFql("GROUPS_WALL").$this->groupid." AND created_time < ".$endDateType->format('U')." AND created_time >= ".$startDateType->format('U')." LIMIT 300";
 		$params = array('method' => 'fql.query', 'query' => $this->fql, );
 		$this->result =  $this->facebook->api($params);
 		}

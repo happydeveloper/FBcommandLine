@@ -79,7 +79,15 @@ function pushStream() {
  		$codingeverybody = new Codingeverybody();
 		if($codingeverybody->user) {
 			echo "<a href=\"<?php echo 'common\/logout.php'; ?>\">logout</a>";
-                       	$codingeverybody->getStream('2010-12-31', addDate('2010-12-31'));
+			
+		
+for($i = 0; $i < 366; $i++)
+{			$baseDate = "2010-12-31";
+//echo date('Y-m-d', strtotime($baseDate. ' + '.$i.' days')).'<br />';
+$loadDate = date('Y-m-d', strtotime($baseDate. ' + '.$i.' days'));
+echo $loadDate.'<br />';
+//}
+                       	$codingeverybody->getStream($loadDate, addDate($loadDate));
 				foreach($codingeverybody->result as $row){	
 				$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
 				foreach($row as $key=>$value){	
@@ -91,16 +99,25 @@ function pushStream() {
                                         	$codingeverybodyintodb->permalink = $value;
                                 	if($key == 'message') 
                                         	$codingeverybodyintodb->message =$value;
+					if($key == 'message_tags')
+						$codingeverybodyintodb->tag =  json_encode($value); //!empty($value) ? var_dump($value) : "";
+					if($key == 'actor_id')
+						$codingeverybodyintodb->actor_id = $value;
+					if($key == 'comment_info')
+						$codingeverybodyintodb->comment_info = json_encode($value);
+					if($key == 'like_info')
+						$codingeverybodyintodb->like_info = json_encode($value);
+				
 				}
-				$codingeverybodyintodb->tag = "페이스북 태그";
-				$codingeverybodyintodb->source_id = "생활코딩";
+				$codingeverybodyintodb->source_id = "174499879257223";
 				$codingeverybodyintodb->created = date("Y-m-d H:i:s");
-				$codingeverybodyintodb->filter_key = "필터키";
+				$codingeverybodyintodb->filter_key = "The filter key to fetch data with. This key should be retrieved by querying the stream_filter FQL table or with the special values 'others' or 'owner'.";
 			
 				$codingeverybodyintodb->insert();
 
 				}
-		
+echo $loadDate.' 해당 날짜의 스트림 데이타베이스 넣기 완료 '.'<br />';
+}		
 			} else 	{
 				$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
 				$codingeverybodyintodb->insert();

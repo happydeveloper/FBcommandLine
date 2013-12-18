@@ -11,7 +11,11 @@ class codingeverybodyintodb
 	public $post_id = "post_id into database";
 	public $filter_key = "filter into database";
 
-  	public $sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key) values (:message, :message_tag, :permalink, :source_id, :created_time, :created, :post_id, :filter_key);";
+	public $actor_id = "actor_id into database";
+	public $like_info = "like info into databse";
+	public $comment_info = "comment info into databse";
+ 
+  	public $sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key, actor_id, like_info, comment_info) values (:message, :message_tag, :permalink, :source_id, :created_time, :created, :post_id, :filter_key, :actor_id, :like_info, :comment_info);";
 
 
 	public function __construct($db)
@@ -32,6 +36,10 @@ class codingeverybodyintodb
 		$stmt->bindParam(":created", $this->created, PDO::PARAM_STR);
 		$stmt->bindParam(":post_id", $this->post_id, PDO::PARAM_STR);
 		$stmt->bindParam(":filter_key",$this->filter_key, PDO::PARAM_STR);
+		$stmt->bindParam(":actor_id",$this->actor_id, PDO::PARAM_STR);
+		$stmt->bindParam(":comment_info", $this->comment_info, PDO::PARAM_STR);
+		$stmt->bindParam(":like_info", $this->like_info, PDO::PARAM_STR);
+
 		$stmt->execute();
 		$stmt->id = $this->db->lastInsertId();
 		$db = null;
