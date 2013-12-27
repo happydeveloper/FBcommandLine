@@ -81,8 +81,8 @@ function pushStream() {
 			echo "<a href=\"<?php echo 'common\/logout.php'; ?>\">logout</a>";
 			
 		
-for($i = 0; $i < 365; $i++)
-{			$baseDate = "2012-12-29";
+for($i = 0; $i < 1093; $i++)
+{			$baseDate = "2010-12-31";
 //echo date('Y-m-d', strtotime($baseDate. ' + '.$i.' days')).'<br />';
 $loadDate = date('Y-m-d', strtotime($baseDate. ' + '.$i.' days'));
 echo $loadDate.'<br />';
