@@ -8,4 +8,7 @@ SELECT * FROM stream WHERE created > '2014-01-01' ORDER BY source_id DESC LIMIT 
 SELECT * FROM stream ORDER BY created_time desc LIMIT 10\G;
 
 SELECT COUNT(*) FROM stream;
+
+SHOW PROCESSLIST;
+
 EXIT
