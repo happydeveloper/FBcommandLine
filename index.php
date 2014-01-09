@@ -16,7 +16,6 @@ $app->get('/', function() use ($app) {
  
 $app->get('/friends', function() use ($app) {
     $app->render('myfriends.php');
-    //echo "Test";
 });
 
 $app->map('/codingeverybody', function() use ($app) {
@@ -33,8 +32,17 @@ $app->map('/comment', function() use($app) {
 
 $app->get('/dbtest', 'getStream');
 
-$app->get('/dbinsertTest','pushStream');
+$app->get('/dbinsert','pushStream');
+
 $app->run();
+
+function makelog($msg){
+      $logtime=  date('Y-m-d H:i:s');
+      $logfile = date('Ymd');
+      $log_fp = @fopen("./log/log_{$logfile}.txt","a+");
+      @fwrite($log_fp,"[$logtime] : $msg\n");
+      @fclose($log_fp);
+}
 
 function getConnection()
 {
@@ -58,18 +66,19 @@ function getStream() {
         $db = null;
         echo '{"stream": ' . json_encode($stream) . '}';
     } catch(PDOException $e) {
+	makelog($e->getMessage());
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
 function addDate($YMD)
 {
-$date = date_create($YMD);
-date_add($date, date_interval_create_from_date_string('1 days'));
-return  date_format($date, 'Y-m-d');
+	$date = date_create($YMD);
+	date_add($date, date_interval_create_from_date_string('1 days'));
+	return  date_format($date, 'Y-m-d');
 }
 
-function pushStream() {
+function pushStream($startYear='2014'){
   		try {
 		//DTO에 담아서 처리 함
 		//하루 단위로 처리함
@@ -80,13 +89,12 @@ function pushStream() {
 		if($codingeverybody->user) {
 			echo "<a href=\"<?php echo 'common\/logout.php'; ?>\">logout</a>";
 			
-		
-for($i = 0; $i < 1107; $i++)
-{			$baseDate = "2010-12-31";
-//echo date('Y-m-d', strtotime($baseDate. ' + '.$i.' days')).'<br />';
-$loadDate = date('Y-m-d', strtotime($baseDate. ' + '.$i.' days'));
-echo $loadDate.'<br />';
-//}
+	        makelog($startYear."data pushed stream into db.");	
+		for($i = 0; $i < 365; $i++)
+		{			
+			$baseDate = $startYear."-01-01";
+			$loadDate = date('Y-m-d', strtotime($baseDate. ' + '.$i.' days'));
+			echo $loadDate.'<br />';
                        	$codingeverybody->getStream($loadDate, addDate($loadDate));
 				foreach($codingeverybody->result as $row){	
 				$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
@@ -117,6 +125,8 @@ echo $loadDate.'<br />';
 
 				}
 echo $loadDate.' 해당 날짜의 스트림 데이타베이스 넣기 완료 '.'<br />';
+
+
 }		
 			} else 	{
 				$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
@@ -124,6 +134,8 @@ echo $loadDate.' 해당 날짜의 스트림 데이타베이스 넣기 완료 '.'
 			}
 		} catch(PDOException $e) {
 			echo '{"error":{"text":'. $e->getMessage() .'}}';
+			makelog('{"error":{"test":'.$e->getMessage().'}}');
 		}
+
 	}
 ?>
