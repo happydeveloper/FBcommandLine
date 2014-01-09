@@ -32,7 +32,9 @@ $app->map('/comment', function() use($app) {
 
 $app->get('/dbtest', 'getStream');
 
-$app->get('/dbinsert','pushStream');
+$app->get('/locktest','pushStream');
+
+$app->get('/dbinsert/:startYear','pushStream');
 
 $app->run();
 
