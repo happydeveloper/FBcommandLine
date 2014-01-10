@@ -1,26 +1,9 @@
 <?php
 require 'vendor/autoload.php';
 require_once 'classes/codingeverybody.php';
-if (isset($argv)) {
-    $argument1 = $argv[0];
-    $argument2 = $argv[1];
-    
-    echo $argument1;
-    echo $argument2;
-    if(!headers_sent()) session_start();
+require_once 'classes/library_my.php';
 
-    $_SERVER['HTTP_HOST'] = 'uclud.duru.pe.kr';
-    $_SERVER['REQUEST_URI'] = '/codingeverybody.php';
-    $stream = new Codingeverybody();
-    echo "\n object created";
-    echo "\n getConnection";
-    getConnection();
-    getStream();
-	echo "\n push stream call";
-    pushStream();
-	echo "\n 2014년 푸시";
-    exit();
-}
+$Lib->cli();
 
 $app = new \Slim\Slim();
 $app->config(array(
@@ -56,13 +39,6 @@ $app->get('/dbinsert/:startYear','pushStream');
 
 $app->run();
 
-function makelog($msg){
-      $logtime=  date('Y-m-d H:i:s');
-      $logfile = date('Ymd');
-      $log_fp = @fopen("./log/log_{$logfile}.txt","a+");
-      @fwrite($log_fp,"[$logtime] : $msg\n");
-      @fclose($log_fp);
-}
 
 function getConnection()
 {
@@ -87,17 +63,11 @@ function getStream() {
         $db = null;
         echo '{"stream": ' . json_encode($stream) . '}';
     } catch(PDOException $e) {
-	makelog($e->getMessage());
+	$Lib->makelog($e->getMessage());
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
-function addDate($YMD)
-{
-	$date = date_create($YMD);
-	date_add($date, date_interval_create_from_date_string('1 days'));
-	return  date_format($date, 'Y-m-d');
-}
 
 function pushStream($startYear='2014'){
   		try {
@@ -110,7 +80,7 @@ function pushStream($startYear='2014'){
 		if($codingeverybody->user) {
 			echo "<a href=\"<?php echo 'common\/logout.php'; ?>\">logout</a>";
 			
-	        makelog($startYear."data pushed stream into db.");	
+	        $Lib->makelog($startYear."data pushed stream into db.");	
 		for($i = 0; $i < 365; $i++)
 		{			
 			$baseDate = $startYear."-01-01";
@@ -155,7 +125,7 @@ echo $loadDate.' 해당 날짜의 스트림 데이타베이스 넣기 완료 '.'
 			}
 		} catch(PDOException $e) {
 			echo '{"error":{"text":'. $e->getMessage() .'}}';
-			makelog('{"error":{"test":'.$e->getMessage().'}}');
+			$Lib->makelog('{"error":{"test":'.$e->getMessage().'}}');
 		}
 
 	}
