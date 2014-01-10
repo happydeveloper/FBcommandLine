@@ -13,7 +13,12 @@ if (isset($argv)) {
     $_SERVER['REQUEST_URI'] = '/codingeverybody.php';
     $stream = new Codingeverybody();
     echo "\n object created";
-//    getStream();
+    echo "\n getConnection";
+    getConnection();
+    getStream();
+	echo "\n push stream call";
+    pushStream();
+	echo "\n 2014년 푸시";
     exit();
 }
 
@@ -73,7 +78,8 @@ function getConnection()
 }
 
 function getStream() {
-    $sql = "select * from stream";
+   
+    $sql = "SELECT * FROM stream ORDER BY created_time desc LIMIT 10;";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);

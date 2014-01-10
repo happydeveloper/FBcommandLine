@@ -1,1 +1,4 @@
 [2014-01-10 09:19:44] : 2013data pushed stream into db.
+[2014-01-10 09:42:25] : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\G' at line 1
+[2014-01-10 09:45:06] : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\G' at line 1
+[2014-01-10 09:55:24] : 2014data pushed stream into db.
