@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 require_once 'classes/codingeverybody.php';
 require_once 'classes/library_my.php';
+require_once 'classes/codingeverybodyintodb.php';
 
 $Lib->cli();
 
@@ -51,9 +52,6 @@ function pushStream($startYear='2014'){
   		try {
 		//DTO에 담아서 처리 함
 		//하루 단위로 처리함
-		
-		require_once 'classes/codingeverybodyintodb.php';
-
  		$codingeverybody = new Codingeverybody();
 		if($codingeverybody->user) {
 			echo "<a href=\"<?php echo 'common\/logout.php'; ?>\">logout</a>";
