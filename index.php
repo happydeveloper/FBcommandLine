@@ -40,32 +40,10 @@ $app->get('/dbinsert/:startYear','pushStream');
 $app->run();
 
 
-function getConnection()
-{
-	$dbhost = "localhost";
-	$dbuser = "root";
-	$dbpass = "1111";
-	$dbname = "fb_archive";
-	$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname;charset=utf8", $dbuser, $dbpass,
-                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-
-	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-   	return $dbh;
-}
 
 function getStream() {
-   
-    $sql = "SELECT * FROM stream ORDER BY created_time desc LIMIT 10;";
-    try {
-        $db = getConnection();
-        $stmt = $db->query($sql);
-        $stream = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $db = null;
-        echo '{"stream": ' . json_encode($stream) . '}';
-    } catch(PDOException $e) {
-	$Lib->makelog($e->getMessage());
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
+	 $Lib = new Library_my();
+	 $Lib->grudTest();
 }
 
 
@@ -117,7 +95,7 @@ function pushStream($startYear='2014'){
 				}
 echo $loadDate.' 해당 날짜의 스트림 데이타베이스 넣기 완료 '.'<br />';
 
-
+				$Lib->makelog($startYear.' complate');
 }		
 			} else 	{
 				$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
