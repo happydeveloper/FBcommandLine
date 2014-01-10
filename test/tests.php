@@ -194,4 +194,33 @@ class codingeverybodyTestCase extends PHPUnit_Framework_TestCase
       			array('174499879257223_677441018963104')
 		);
 	}
+
+	/**
+	/* Dbmanager 클래스 테스트
+	*/
+        public function testDbmanager()
+	{
+		$testdbmanager = new Dbmanager('connection1');
+		$testdbmanager1 = new Dbmanager('connection2');
+		$testdbmanager2 = new Dbmanager('connection3');
+		$this->assertEquals($testdbmanager->name, 'connection1');
+		$this->assertEquals($testdbmanager1->name, 'connection2');
+		$this->assertEquals($testdbmanager2->name, 'connection3');
+	}
+
+	/**
+	* Library_my 클래스 테스트
+	*/
+	public function testLibrary_my()
+	{
+
+	}
+	/**
+	* codingverybodyintodb 클래스 테스트
+	*/
+	public function testCodingeverbodyintodb()
+	{
+	//	$dbintoTest = new codingeverybodyintodb();
+
+	}
 }
