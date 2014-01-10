@@ -1,8 +1,21 @@
 <?php
-
 require 'vendor/autoload.php';
-
 require_once 'classes/codingeverybody.php';
+if (isset($argv)) {
+    $argument1 = $argv[0];
+    $argument2 = $argv[1];
+    
+    echo $argument1;
+    echo $argument2;
+    if(!headers_sent()) session_start();
+
+    $_SERVER['HTTP_HOST'] = 'uclud.duru.pe.kr';
+    $_SERVER['REQUEST_URI'] = '/codingeverybody.php';
+    $stream = new Codingeverybody();
+    echo "\n object created";
+//    getStream();
+    exit();
+}
 
 $app = new \Slim\Slim();
 $app->config(array(
