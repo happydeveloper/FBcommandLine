@@ -22,7 +22,7 @@ class Dbmanager
 	public function grudTest()
 	{
 
-    		$sql = "SELECT * FROM stream ORDER BY created_time desc LIMIT 10;";
+    		$sql = "SELECT * FROM stream ORDER BY created_time desc LIMIT 1000;";
     		try {
         		$db = $this->getConnection();
         		$stmt = $db->query($sql);
