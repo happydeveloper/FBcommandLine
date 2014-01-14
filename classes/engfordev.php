@@ -10,43 +10,19 @@ if (($loader = require_once __DIR__ . './../vendor/autoload.php') == null)  {
 
 $base = realpath(dirname(__FILE__) . '/..');
 require_once "$base/classes/fqlmanager.php";
+require_once "$base/classes/basetaskfacebook.php";
 
-class Engfordev
+class Engfordev extends baseTaskFacebook
 {
-	const APP_ID = '541305629256667';
-	const SECRET = '95492b0183156cd27d69b1308980ef26';
-	//페이스북 객체 
-	public $facebook;
-	public $user;
 	public $fql;
 	public $result;
 	public $groupid = 157076174344216; 
 
 	public function __construct() 
 	{
-		$this->facebook = new Facebook(array(
-			'appId'  => self::APP_ID,
-			'secret' => self::SECRET,
-			'cookie' => true));
-		$this->user = $this->facebook->getUser();
-		if($this->user) 
-		{
-			try {
-				$this->user_profile = $this->facebook->api('/me');
-			} catch(FacebookApiException $e) {
-				error_log($e);
-				$this->user = null;
-			}
-		}
+		parent::__construct();
 	}
 
-	public function getUserState(){
-		if($this->user) {
-			return $logoutUrl = $this->facebook->getLogoutUrl();
-		} else {
-			return $loginUrl = $this->facebook->getLoginUrl();
-		}
-	}
 
 	public function getStream($startDate, $endDate)
 	{
