@@ -1,16 +1,5 @@
 <?php
-if(false) //개발중일때는 직접실행 허용 //상수로 허용
-{
-	exit('No direct script access allowed');
-}
-
-if (($loader = require_once __DIR__ . './../vendor/autoload.php') == null)  {
-  die('Vendor directory not found, Please run composer install.');
-}
-
-$base = realpath(dirname(__FILE__) . '/..');
-require_once "$base/classes/fqlmanager.php";
-require_once "$base/classes/basetaskfacebook.php";
+require 'bootstrap.php';
 
 class Codingeverybody extends baseTaskFacebook
 {
@@ -34,6 +23,18 @@ class Codingeverybody extends baseTaskFacebook
 			$this->fql = $fqlmanager->loadFql("GROUPS_WALL").$this->groupid." AND created_time < ".$endDateType->format('U')." AND created_time >= ".$startDateType->format('U')." LIMIT 300";
 		$params = array('method' => 'fql.query', 'query' => $this->fql, );
 		$this->result =  $this->facebook->api($params);
+		}
+	}
+
+	public function filter()
+	{
+		if($this->user)
+		{
+			
+		}
+		else
+		{
+			$this->getUserState();
 		}
 	}
 }
