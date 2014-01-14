@@ -8,7 +8,9 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 
 ?>	
 <head>
-    <meta charset="utf-8" />
+    <?php
+	require '_head.php';
+    ?>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
     <title> 페이스북 그룹 글 </title>
   </head>

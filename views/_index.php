@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="utf-8" />
+<?php
+	require '_head.php';
+?>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
     <title> 페이스북 검색 트래킹 </title>
     </head>
@@ -9,7 +11,7 @@
 <?php
 	include_once 'nav.php';
 ?>
-	<pre>
+	<pre class="well">
 	페이스북 그룹  검색 기능 - 질문하기전에 찾아보기
 	나중에 보기 기능 - 북마크
 	태깅 기능 - 협업

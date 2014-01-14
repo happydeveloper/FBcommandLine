@@ -8,7 +8,9 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 
 ?>	
 <head>
-    <meta charset="utf-8" />
+<?php 
+	require '_head.php';
+?>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
     <title> 페이스북 그룹 글 </title>
   </head>
@@ -29,6 +31,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 ?>
 
     <?php if ($codingeverybody->user) : // 사용자 객체가 있는지 여부 체크 ?>
+<div class="well">
       <a href="<?php echo 'common/logout.php'; ?>">얼굴북 나가기</a>
 
 
@@ -50,7 +53,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 		<p><label>조회 시작일</label><input type="text" name="start" value="<?php echo date('Y-m-d') ?>" /></p>
         	<p><label>조회 종료일</label><input type="text" name="end"   value="<?php echo $date->format('Y-m-d') ?>"/></p>
  
-        	<input type="submit" />
+        	<input class="btn btn-default" type="submit" />
 	</form>
 
     <?php else: ?>
@@ -58,6 +61,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
         <a href="<?php echo $codingeverybody->facebook->getLoginUrl(); ?>">얼굴책 로그인</a>
       </div>
     <?php endif ?>
+</div>
 <hr />
     <?php
 
@@ -65,7 +69,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 
 	foreach($codingeverybody->result as $row){
 
-			echo "<div> <article>";
+			echo "<div class='post'> <article>";
 			foreach($row as $key=>$value){
 				if($key == 'post_id') {
 					echo "<span>".$value." 댓글 가져오기 </span>";
@@ -93,6 +97,6 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
     ?>
   <hr />
   <span>생활코딩</span>
-  </body>
+</body>
 
 </html>

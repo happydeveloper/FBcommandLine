@@ -1,5 +1,5 @@
 
-<nav id="main_menu">
+<nav class="navbar navbar-default" role="navigation" id="main_menu">
         <div class="wrapper">
                 <ul id="top_menu">
 <?php
