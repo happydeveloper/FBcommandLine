@@ -10,12 +10,22 @@ class baseTaskFacebook
 
 	public function __construct() {
 		
-	$this->facebook = new Facebook(array(
+		$this->facebook = new Facebook(array(
 		'appId' => '541305629256667',
 		'secret' => '95492b0183156cd27d69b1308980ef26',
 		'cookie' => true));
 
-	$this->user = $this->facebook->getUser();
+		$this->user = $this->facebook->getUser();
+
+		if($this->user)
+		{
+			try {
+				$this->user_profile = $this->facebook->api('/me');
+			} catch(FacebookApiException $e) {
+				error_log($e);
+				$this->user = null;
+			}
+		}
 	}
 
 
