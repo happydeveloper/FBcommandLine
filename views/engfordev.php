@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php
-
-if (($loader = require_once 'vendor/autoload.php') == null)  {
-  die('Vendor directory not found, Please run composer install.');
-}
-
-?>	
-<head>
     <?php
 	require '_head.php';
     ?>
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
-    <title> 페이스북 그룹 글 </title>
-  </head>
-  <body>
-
 <?php
 //OnLoad 초기 로드시 작업
 	require_once 'classes/engfordev.php';
@@ -31,6 +16,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 ?>
 
     <?php if ($engfordev->user) : // 사용자 객체가 있는지 여부 체크 ?>
+<div class="well">
       <a href="<?php echo 'common/logout.php'; ?>">얼굴책  나가기</a>
 
 	<form action="./engfordev"  method="POST">
@@ -59,7 +45,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
         <a href="<?php echo $engfordev->facebook->getLoginUrl(); ?>">얼굴책 로그인</a>
       </div>
     <?php endif ?>
-
+</div>
 <hr />
     <?php
 
@@ -67,7 +53,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 
 	foreach($engfordev->result as $row){
 
-			echo "<div> <article>";
+			echo "<div class='post'> <article>";
 			foreach($row as $key=>$value){
 				if($key == 'post_id') {
 					echo "<span>".$value." 댓글 가져오기 </span>";

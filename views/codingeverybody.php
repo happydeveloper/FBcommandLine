@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php
-
-if (($loader = require_once 'vendor/autoload.php') == null)  {
-  die('Vendor directory not found, Please run composer install.');
-}
-
-?>	
-<head>
 <?php 
 	require '_head.php';
 ?>
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
-    <title> 페이스북 그룹 글 </title>
-  </head>
-  <body>
-
 <?php
 //OnLoad 초기 로드시 작업
 	require_once 'classes/codingeverybody.php';
@@ -53,7 +38,7 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 		<p><label>조회 시작일</label><input type="text" name="start" value="<?php echo date('Y-m-d') ?>" /></p>
         	<p><label>조회 종료일</label><input type="text" name="end"   value="<?php echo $date->format('Y-m-d') ?>"/></p>
  
-        	<input class="btn btn-default" type="submit" />
+        	<input class="btn btn-primary" type="submit" />
 	</form>
 
     <?php else: ?>
