@@ -4,7 +4,7 @@ require_once 'classes/codingeverybody.php';
 require_once 'classes/library_my.php';
 require_once 'classes/codingeverybodyintodb.php';
 
-$Lib->cli();
+//$Lib->cli();
 
 $app = new \Slim\Slim();
 $app->config(array(
@@ -30,6 +30,10 @@ $app->map('/engfordev', function() use ($app) {
 
 $app->map('/comment', function() use($app) {
 	$app->render('ot_comment.php');
+})->via('GET', 'POST');
+
+$app->map('/datetimepicker', function() use($app) {
+	$app->render('datetimepicker.php');
 })->via('GET', 'POST');
 
 $app->get('/dbtest', 'getStream');

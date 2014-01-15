@@ -47,7 +47,41 @@
       </div>
     <?php endif ?>
 </div>
+<!-- 달력 컨트롤 --!>
+<div class="container">
+    <div class="col-md-10">
+        <div class='well'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({langague:'ko'});
+            });
+        </script>
+    </div>
+</div>
+    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment-2.4.0.js"></script>
+    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/bootstrap-datetimepicker.js"></script>
+   <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/locales/bootstrap-datetimepicker.ko.js"></script>
+    <script>
+        $(function(){
+            var $window = $(window), $body   = $(document.body);
+            $body.scrollspy({
+                target: '.bs-sidebar'
+            });
+    });
+    </script>
+<!-- 달력컨트롤 끝 --!>
+
 <hr />
+
     <?php
 
 	if($codingeverybody->user &&  $codingeverybody->result != null) {

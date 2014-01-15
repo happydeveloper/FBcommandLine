@@ -37,7 +37,7 @@
 		<p><label>조회 시작일</label><input type="text" name="start" value="<?php echo date('Y-m-d') ?>" /></p>
         	<p><label>조회 종료일</label><input type="text" name="end"   value="<?php echo $date->format('Y-m-d') ?>"/></p>
  
-        	<input type="submit" />
+        	<input class="btn btn-danger" type="submit" />
 	</form>
 
     <?php else: ?>
