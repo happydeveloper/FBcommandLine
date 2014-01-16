@@ -5,6 +5,8 @@
 //OnLoad 초기 로드시 작업
 	require_once 'classes/codingeverybody.php';
 	include_once 'nav.php';
+	require_once 'classes/comment.php';
+	$comment = new Comment();
 	$codingeverybody = new Codingeverybody();
 	if($codingeverybody->user) {
 		if(!empty($_POST['start']) && !empty($_POST['end'])){
@@ -47,41 +49,18 @@
       </div>
     <?php endif ?>
 </div>
-<!-- 달력 컨트롤 --!>
-<div class="container">
-    <div class="col-md-10">
-        <div class='well'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker({langague:'ko'});
-            });
-        </script>
-    </div>
-</div>
-    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment-2.4.0.js"></script>
-    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/bootstrap-datetimepicker.js"></script>
-   <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/locales/bootstrap-datetimepicker.ko.js"></script>
-    <script>
-        $(function(){
-            var $window = $(window), $body   = $(document.body);
-            $body.scrollspy({
-                target: '.bs-sidebar'
-            });
-    });
-    </script>
-<!-- 달력컨트롤 끝 --!>
 
 <hr />
-
+<?php
+//comment 불러오기
+	if($codingeverybody->user && $codingeverybody->result !=null)
+	{
+		foreach($codingeverybody->result as $row)
+		{
+			
+		}
+	}
+?>
     <?php
 
 	if($codingeverybody->user &&  $codingeverybody->result != null) {
@@ -90,9 +69,6 @@
 
 			echo "<div class='post'> <article>";
 			foreach($row as $key=>$value){
-				if($key == 'post_id') {
-					echo "<span>".$value." 댓글 가져오기 </span>";
-				}
 				if($key == 'created_time') {
 				        // $kor_time = new Datetime($value);
 					echo "<span>".gmdate('Y-m-d TH:i:s', $value)."</span>";
@@ -103,7 +79,14 @@
 					echo "<a href='". $value."' target='_blank' >".$key." 영구링크</a>";
 				}
 				if($key == 'message') {
-					echo "<p class='message'>".$value."</p>";
+					echo "<div class='message'>".$value."</div>";
+				}
+				
+				if($key == 'post_id') {
+					//echo "<span>".$value." 댓글 가져오기 </span>";
+					if($comment) {
+						echo "<div class='comment'> 댓글 </div>";	
+					}
 				}
 			}
  			echo "</article> </div>";
