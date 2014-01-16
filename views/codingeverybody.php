@@ -51,16 +51,6 @@
 </div>
 
 <hr />
-<?php
-//comment 불러오기
-	if($codingeverybody->user && $codingeverybody->result !=null)
-	{
-		foreach($codingeverybody->result as $row)
-		{
-			
-		}
-	}
-?>
     <?php
 
 	if($codingeverybody->user &&  $codingeverybody->result != null) {
