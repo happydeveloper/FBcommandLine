@@ -66,7 +66,7 @@
 				}
 
 				if($key == 'permalink') {
-					echo "<a href='". $value."' target='_blank' >".$key." 영구링크</a>";
+					echo "<div class='permalink'><a href='". $value."' target='_blank' >".$key." 영구링크</a></div>";
 				}
 				if($key == 'message') {
 					echo "<div class='message'>".$value."</div>";
