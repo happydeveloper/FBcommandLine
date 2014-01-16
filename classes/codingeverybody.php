@@ -26,6 +26,11 @@ class Codingeverybody extends baseTaskFacebook
 		}
 	}
 
+	public function getStreamText()
+	{
+
+	}
+
 	public function filter()
 	{
 		if($this->user)
