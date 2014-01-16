@@ -16,7 +16,27 @@ class Comment extends baseTaskFacebook
 		if($this->user) {
 			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
 			$params = array('method' => 'fql.query', 'query' => $this->fql, );
-			return $this->result = $this->facebook->api($params);
+			$this->result = $this->facebook->api($params);
+			return $this->result;
+			}
+	}
+
+	public function getCommentText($post_id)
+	{
+		$this->getComment($post_id);
+
+		if($this->result != null)
+		{
+			foreach($this->result as $row)
+			{
+				foreach($row as $key=>$value)
+				{
+					if($key == 'text')
+					{ 
+						echo "<div class='comment'>".$value."</div>";
+					}
+				}	
+			} 
 		}
 	}
 }

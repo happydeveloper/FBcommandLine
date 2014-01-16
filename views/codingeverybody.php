@@ -85,7 +85,7 @@
 				if($key == 'post_id') {
 					//echo "<span>".$value." 댓글 가져오기 </span>";
 					if($comment) {
-						echo "<div class='comment'> 댓글 </div>";	
+					 $comment->getCommentText($value);	
 					}
 				}
 			}
