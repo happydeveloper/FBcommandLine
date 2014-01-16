@@ -52,7 +52,7 @@
 
 <hr />
     <?php
-
+	date_default_timezone_set('Asia/Seoul');
 	if($codingeverybody->user &&  $codingeverybody->result != null) {
 
 	foreach($codingeverybody->result as $row){
@@ -61,7 +61,7 @@
 			foreach($row as $key=>$value){
 				if($key == 'created_time') {
 				        // $kor_time = new Datetime($value);
-					echo "<span>".gmdate('Y-m-d TH:i:s', $value)."</span>";
+					echo "<span>".date('Y-m-d H:i:s', $value)."</span>";
 					
 				}
 
