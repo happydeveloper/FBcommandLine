@@ -18,7 +18,7 @@ class Comment extends baseTaskFacebook
 			$params = array('method' => 'fql.query', 'query' => $this->fql, );
 			$this->result = $this->facebook->api($params);
 			return $this->result;
-			}
+		}
 	}
 
 	public function getCommentText($post_id)
