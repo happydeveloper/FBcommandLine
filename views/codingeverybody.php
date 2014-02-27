@@ -9,8 +9,9 @@
 	$comment = new Comment();
 	$codingeverybody = new Codingeverybody();
 	if($codingeverybody->user) {
-		if(!empty($_POST['start']) && !empty($_POST['end'])){
-			$codingeverybody->getStream($_POST['start'], $_POST['end']);
+		if(!empty($_POST['start']) && !empty($_POST['end'])){ 
+//사용자입력 보안 처리
+			$codingeverybody->getStream(mysql_real_escape_string($_POST['start']), mysql_real_escape_string($_POST['end']));
 		} else {
 			$codingeverybody->getStream('2010-12-31', '2011-01-01');
 		}
