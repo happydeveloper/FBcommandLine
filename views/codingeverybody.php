@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.9.1.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
+
   <script>
   $(function() {
       var clareCalendar = {
@@ -38,7 +38,8 @@
 								showMonthAfterYear: true
 							};
       
-    $( "#datepicker" ).datepicker(clareCalendar);
+    $( "#start" ).datepicker(clareCalendar);
+      $( "#end" ).datepicker(clareCalendar);
   });
   </script>
     <!-- -->
@@ -58,8 +59,8 @@
 	}
 	?>
 
-		<p><label>조회 시작일</label><input type="text" name="start" value="<?php echo date('Y-m-d') ?>" /></p>
-        	<p><label>조회 종료일</label><input type="text" name="end"   value="<?php echo $date->format('Y-m-d') ?>"/></p>
+		<p><label>조회 시작일</label><input type="text" name="start" id="start" value="<?php echo date('Y-m-d') ?>" /></p>
+        	<p><label>조회 종료일</label><input type="text" name="end"   id="end" value="<?php echo $date->format('Y-m-d') ?>"/></p>
  
         	<input class="btn btn-primary" type="submit" />
 	</form>
