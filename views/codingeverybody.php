@@ -101,7 +101,10 @@
 					}
 				}
 			}
- 			echo "</article> </div>";
+			echo "<div class='later'>나중에 보기</div>";
+			echo "<div class='tags'>태그 달기 </div>";
+ 			echo "</article> 
+			</div>";
 	}
 
 	}

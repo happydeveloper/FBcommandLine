@@ -19,6 +19,12 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 	.post article {background-color:#eee;}
 	.post article .message {background-color:#EDEFF4;padding:4px;margin-top:1px;margin-left:30px;}
 	.post article .comment{background-color:#444;color:#F0F8FF;margin-left:45px; border-bottom: 1px solid #ddd;}
+	.post article .later {
+		background-color: #f8c54d;
+	}
+	.post article .tags {
+		background-color: #0077cc;
+	}
     </style>
 
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
