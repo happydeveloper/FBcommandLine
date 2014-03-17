@@ -5,6 +5,7 @@
 	require '_head.php';
 ?>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
+    <meta name="viewport" content="width=device-width, minimal-ui">
     <title> 페이스북 검색 트래킹 </title>
     </head>
 <body>

@@ -27,7 +27,8 @@ if (($loader = require_once 'vendor/autoload.php') == null)  {
 	}
     </style>
 
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width-device-width, minimal-ui">
+    <meta name="viewport" content="width=device-width, minimal-ui">
     <title> 페이스북 그룹 글 </title>
   </head>
   <body>
