@@ -79,7 +79,8 @@
 
 	foreach($codingeverybody->result as $row){
 
-			echo "<div class='post'> <article>";
+			//echo "<div class='post'> <article>";
+			echo "<div> <article>";
 			foreach($row as $key=>$value){
 				if($key == 'created_time') {
 				        // $kor_time = new Datetime($value);
@@ -91,18 +92,18 @@
 					echo "<div class='permalink'><a href='". $value."' target='_blank' >".$key." 영구링크</a></div>";
 				}
 				if($key == 'message') {
-					echo "<div class='message'>".$value."</div>";
+					echo "<div class='message'>".htmlspecialchars($value)."</div>";
 				}
 				
 				if($key == 'post_id') {
 					//echo "<span>".$value." 댓글 가져오기 </span>";
 					if($comment) {
-					 $comment->getCommentText($value);	
+					 $comment->getCommentText(htmlspecialchars($value));	
 					}
 				}
 			}
-			echo "<div class='later'>나중에 보기</div>";
-			echo "<div class='tags'>태그 달기 </div>";
+			echo "<!-- <div class='later'>나중에 보기</div> -->";
+			echo "<!-- <div class='tags'>태그 달기 </div> -->";
  			echo "</article> 
 			</div>";
 	}
