@@ -76,11 +76,13 @@
     <?php
 	date_default_timezone_set('Asia/Seoul');
 	if($codingeverybody->user &&  $codingeverybody->result != null) {
+	echo "글 갯수 : ".count($codingeverybody->result);
 
 	foreach($codingeverybody->result as $row){
 
 			//echo "<div class='post'> <article>";
-			echo "<div> <article>";
+			//echo "<div> <article>";
+			echo "<div> <div>";
 			foreach($row as $key=>$value){
 				if($key == 'created_time') {
 				        // $kor_time = new Datetime($value);
@@ -104,8 +106,7 @@
 			}
 			echo "<!-- <div class='later'>나중에 보기</div> -->";
 			echo "<!-- <div class='tags'>태그 달기 </div> -->";
- 			echo "</article> 
-			</div>";
+ 			echo "</div> </div>";
 	}
 
 	}
