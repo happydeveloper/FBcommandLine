@@ -7,6 +7,8 @@ class Codingeverybody extends baseTaskFacebook
 	public $fql;
 	public $result;
 	public $groupid = 174499879257223;
+	
+	public $searchTime;
 
 	public function __construct() 
 	{
@@ -24,6 +26,7 @@ class Codingeverybody extends baseTaskFacebook
 		$params = array('method' => 'fql.query', 'query' => $this->fql, );
 		$this->result =  $this->facebook->api($params);
 		}
+		$searchTime = "UTC:".time();
 	}
 
 	public function getStreamText()

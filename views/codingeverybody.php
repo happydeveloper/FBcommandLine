@@ -6,6 +6,7 @@
 	require_once 'classes/codingeverybody.php';
 	include_once 'nav.php';
 	require_once 'classes/comment.php';
+	$commentTotalCnt = 0;
 	$comment = new Comment();
 	$codingeverybody = new Codingeverybody();
 	if($codingeverybody->user) {
@@ -77,7 +78,7 @@
 	date_default_timezone_set('Asia/Seoul');
 	if($codingeverybody->user &&  $codingeverybody->result != null) {
 	echo "글 갯수 : ".count($codingeverybody->result);
-
+        echo "수집일시: ".time()."<br>";
 	foreach($codingeverybody->result as $row){
 
 			//echo "<div class='post'> <article>";
@@ -100,7 +101,8 @@
 				if($key == 'post_id') {
 					//echo "<span>".$value." 댓글 가져오기 </span>";
 					if($comment) {
-					 $comment->getCommentText(htmlspecialchars($value));	
+					 $comment->getCommentText(htmlspecialchars($value));
+$commentTotalCnt += $comment->commentCnt;	
 					}
 				}
 			}
@@ -113,6 +115,13 @@
 	else {
 		echo "<span>생활코딩</span>";
 	}
+
+	echo "<br> 글 갯수 : ".count($codingeverybody->result);
+	echo "<br> 댓글수 : ".$commentTotalCnt."<br>";
+        echo "<br> 수집일시: ".time()."<br>";
+	echo "<br> 글 작성 일시 : ".$commentTotalCnt."<br>";
+	
+	echo "<br> 글 작성 일시 ".mysql_real_escape_string($_POST['start'])."~".mysql_real_escape_string($_POST['end'])." 00:00";
     ?>
   <hr />
   <span>생활코딩</span>

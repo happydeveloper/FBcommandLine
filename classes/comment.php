@@ -5,6 +5,7 @@ class Comment extends baseTaskFacebook
 {
 	public $fql;
 	public $result;
+	public $commentCnt;
 
 	public function __construct() 
 	{
@@ -17,6 +18,7 @@ class Comment extends baseTaskFacebook
 			$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
 			$params = array('method' => 'fql.query', 'query' => $this->fql, );
 			$this->result = $this->facebook->api($params);
+			$this->commentCnt = count($this->result);
 			return $this->result;
 		}
 	}
@@ -27,13 +29,14 @@ class Comment extends baseTaskFacebook
 
 		if($this->result != null)
 		{
+			$commentCnt = count($this->result);
 			foreach($this->result as $row)
 			{
 				foreach($row as $key=>$value)
 				{
 					if($key == 'text')
 					{ 
-						echo "<div class='comment'>".$value."</div>";
+						echo "<div class='note'>".$value."</div>";
 					}
 				}	
 			} 
