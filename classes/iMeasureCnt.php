@@ -1,9 +1,7 @@
 <?php
-interface iMeasureCnt
+interface iMeasureCnt 
 {
-	public getCount()
-	{
-
-	}
+    public function setVariable($name, $var);
+    public function getVariable($name);
 }
 ?>

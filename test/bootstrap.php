@@ -7,6 +7,7 @@ $base = realpath(dirname(__FILE__) . '/..');
 require_once "$base/classes/fqlmanager.php";
 require_once "$base/classes/basetaskfacebook.php";
 require_once "$base/classes/comment.php";
+require_once "$base/classes/measure.php";
 
 //db 연결 담당
 require_once "$base/classes/library_my.php";
@@ -18,4 +19,4 @@ require_once "$base/classes/library_my.php";
 require_once "$base/classes/engfordev.php";
 require_once "$base/classes/codingeverybody.php";
 require_once "$base/classes/codingeverybodyintodb.php";
-require_once "$base/classes/codingeverybodyfilter.php";
+//require_once "$base/classes/codingeverybodyfilter.php";

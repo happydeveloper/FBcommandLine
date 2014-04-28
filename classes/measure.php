@@ -1,21 +1,33 @@
 <?php
-class Measure implements iMeasureCnt {
-	$postTotalCnt;
-	$commentTotalCnt;
-	$writedTime;
-	$searchedTime;
-	$postParticipant;
-	$commentParticipant;
-	$likeTotalCnt;
-	$best_activitor;
-	$best_like_cnt_post;
-	$best_comment_cnt_post;
-	$databaseCheckIn;
+require 'bootstrap.php';
 
-	public getCount()
+class Measure implements iMeasureCnt 
+{
+	//private	$postTotalCnt;
+	//private $commentTotalCnt;
+	//private $likeTotalCnt;
+
+	//private $writedTime;
+	//private $searchedTime;
+	
+	//private $postParticipant;
+	//private $commentParticipant;
+	//private $best_activitor;
+
+	//private $best_like_cnt_post;
+	//private $best_comment_cnt_post;
+
+	//private	$databaseCheckIn;
+	private $vars = array();
+
+	public function setVariable($name, $val)
 	{
-		$this->postTotalCnt = 100;
-		return $this->postTotalCnt;
+		$this->vars[$name] = $val;
+	}
+
+    	public function getVariable($name)
+	{
+		return $this->vars[$name];
 	}
 }
 ?>
