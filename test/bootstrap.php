@@ -12,6 +12,8 @@ require_once "$base/classes/measure.php";
 //db 연결 담당
 require_once "$base/classes/library_my.php";
 
+//Facebook API 연결부분클래스
+require_once "$base/classes/streamfactory.php";
 
 /**
 * 업무 영역
