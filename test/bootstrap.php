@@ -12,6 +12,7 @@ require_once "$base/classes/measure.php";
 //db 연결 담당
 require_once "$base/classes/library_my.php";
 
+require_once "$base/classes/appSetting.php";
 
 /**
 * 업무 영역
