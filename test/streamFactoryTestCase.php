@@ -8,10 +8,23 @@ class StreamFactoryTestCase extends PHPUnit_Framework_TestCase
 		$this->assertTrue($foo);
 	}
 
-	public function testCreate()
+	/**
+	* @dataProvider provider
+	*/
+	public function testCreate($id, $nickname)
 	{
-		$groupStream = streamFactory::create('174499879257223', 'codingeverybody');
+		$groupStream = streamFactory::create($id, $nickname);
 		$this->assertNotNull($groupStream);
+	}
+	/**
+	* @depends testCreate
+	*/
+	public function provider()
+	{
+		return array(
+			array('174499879257223', 'codingeverybody'),
+			array('157076174344216', 'Engfordev')
+		);
 	}
 
 
