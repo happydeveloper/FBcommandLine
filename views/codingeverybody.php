@@ -121,7 +121,7 @@ $commentTotalCnt += $comment->commentCnt;
         echo "<br> 수집일시: ".time()."<br>";
 	echo "<br> 글 작성 일시 : ".$commentTotalCnt."<br>";
 	
-	echo "<br> 글 작성 일시 ".mysql_real_escape_string($_POST['start'])."~".mysql_real_escape_string($_POST['end'])." 00:00";
+	//echo "<br> 글 작성 일시 ".mysql_real_escape_string($_POST['start'])."~".mysql_real_escape_string($_POST['end'])." 00:00";
     ?>
   <hr />
   <span>생활코딩</span>

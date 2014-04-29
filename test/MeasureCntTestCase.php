@@ -23,5 +23,11 @@ class MeasureCntTestCase extends PHPUnit_Framework_TestCase
 		$this->assertEquals($i,$measure->getVariable("postTotalCnt"));
 		$this->assertEquals($i,$measure->getVariable("commentTotalCnt"));
 		}
+	}
+
+	public function testGetVariable()
+	{
+		$measure = new Measure();
+		
 	}	
 }
