@@ -31,10 +31,10 @@ if($basetaskfacebook->user) {
 
 if($basetaskfacebook->user) {
    //Create Query
-    $fql = new fqlManager();
+    fqlManager::getInstance();
     $params = array(
         'method' => 'fql.query',
-        'query' => $fql->loadFql('MY_FRIENDS').$basetaskfacebook->user.")",
+        'query' => fqlManager::loadFql('MY_FRIENDS').$basetaskfacebook->user.")",
     );
  
     //Run Query
