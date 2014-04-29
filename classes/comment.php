@@ -17,9 +17,8 @@ class Comment extends baseTaskFacebook
 	{
 		if($this->user) {
 			try {
-			$fqlmanager = new fqlManager();
-			$this->fql = $fqlmanager->loadFql("COMMENT").$post_id."'";
-			//$this->fql = "SELECT fromid, username, text, time, post_id FROM comment WHERE post_id = '".$post_id."'";
+			fqlManager::getInstance();
+			$this->fql = fqlManager::loadFql("COMMENT").$post_id."'";
 			$params = array('method' => 'fql.query', 'query' => $this->fql, );
 			$this->result = $this->facebook->api($params);
 			$this->commentCnt = count($this->result);
