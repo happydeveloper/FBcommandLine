@@ -14,5 +14,11 @@ class appSettingTestCase extends PHPUnit_Framework_TestCase
 		$setting->readSetting();
 		//$this->assertEquals($setting->readSetting(), 12345);
 	}
+
+	public function testJsonFileRead()
+	{
+		$setting = new appSetting();
+		$setting->jsonFileRead();
+	}
 }
 ?>

@@ -3,21 +3,43 @@ class appSetting
 {
 	public function readSetting()
 	{
-		$dir = "/Applications/mampstack-5.4.25-0/apache2/htdocs/FacebookSearchKeeper";
 		try{
-		$json;
-		$file = fopen($dir."/setting.json", 'r');
-		while(!feof($file)) {
-			$json += fgets($file);
+		$fileName = "setting.json";
+
+		$json_array = array(
+			'input' => 'test',
+			'input2' => 'test2'
+			);
+
+		if(file_exists($fileName)) {
+			unlink($fileName);
 		}
+
+		$file = fopen($fileName, 'a');
+
+		fwrite($file, json_encode($json_array));
+		
 		fclose($file);
-		echo $json;
+		
 		$obj = json_decode($json);
-		return $obj->{'foo-var'};
+
+		echo $obj->{'input'};
+		return $obj->{'input'};
 		//var_dump($fh);
 		} catch (Exception $e) {
 			echo $e->getMessage().": Caugth Error";
 		}
+	}
+
+	public function jsonFileRead()
+	{
+	
+		$string = file_get_contents('/Applications/mampstack-5.4.25-0/apache2/htdocs/FacebookSearchKeeper/setting.json');
+		echo "json file read";
+		//$json = json_decode(file_get_contents($file), true);
+		$jsonRs = json_decode($string, true);
+		
+		var_dump($jsonRs);
 	}
 
 }
