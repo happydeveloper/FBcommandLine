@@ -21,11 +21,6 @@ class appSetting
 		
 		fclose($file);
 		
-		$obj = json_decode($json);
-
-		echo $obj->{'input'};
-		return $obj->{'input'};
-		//var_dump($fh);
 		} catch (Exception $e) {
 			echo $e->getMessage().": Caugth Error";
 		}
@@ -34,12 +29,15 @@ class appSetting
 	public function jsonFileRead()
 	{
 	
-		$string = file_get_contents('/Applications/mampstack-5.4.25-0/apache2/htdocs/FacebookSearchKeeper/setting.json');
-		echo "json file read";
-		//$json = json_decode(file_get_contents($file), true);
+		$string = file_get_contents('setting.json');
+		echo $string;
 		$jsonRs = json_decode($string, true);
-		
+
 		var_dump($jsonRs);
+
+
+		$obj = json_decode($string);
+		print $obj->{'input'}; // 12345
 	}
 
 }
