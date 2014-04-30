@@ -13,6 +13,8 @@ require_once "$base/classes/measure.php";
 require_once "$base/classes/library_my.php";
 
 require_once "$base/classes/appSetting.php";
+//Facebook API 연결부분클래스
+require_once "$base/classes/streamfactory.php";
 
 /**
 * 업무 영역

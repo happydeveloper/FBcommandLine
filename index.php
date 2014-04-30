@@ -7,43 +7,47 @@ require_once 'classes/codingeverybodyintodb.php';
 //$Lib->cli();
 
 $app = new \Slim\Slim();
-$app->config(array(
-    'debug' => true,
-    'templates.path' => 'views'
-));
+try {
+	$app->config(array(
+    	'debug' => true,
+    	'templates.path' => 'views'
+	));
 
-$app->get('/', function() use ($app) {
-    $app->render('_index.php');
-}); 
+	$app->get('/', function() use ($app) {
+    		$app->render('_index.php');
+	}); 
  
-$app->get('/friends', function() use ($app) {
-    $app->render('myfriends.php');
-});
+	$app->get('/friends', function() use ($app) {
+    	$app->render('myfriends.php');
+	});
 
-$app->map('/codingeverybody', function() use ($app) {
-	$app->render('codingeverybody.php');
-})->via('GET', 'POST'); 
+	$app->map('/codingeverybody', function() use ($app) {
+		$app->render('codingeverybody.php');
+	})->via('GET', 'POST'); 
 
-$app->map('/engfordev', function() use ($app) {
-	$app->render('engfordev.php');
-})->via('GET', 'POST');
+	$app->map('/engfordev', function() use ($app) {
+		$app->render('engfordev.php');
+	})->via('GET', 'POST');
 
-$app->map('/comment', function() use($app) {
-	$app->render('ot_comment.php');
-})->via('GET', 'POST');
+	$app->map('/comment', function() use($app) {
+		$app->render('ot_comment.php');
+	})->via('GET', 'POST');
 
-$app->map('/datetimepicker', function() use($app) {
-	$app->render('datetimepicker.php');
-})->via('GET', 'POST');
+	$app->map('/datetimepicker', function() use($app) {
+		$app->render('datetimepicker.php');
+	})->via('GET', 'POST');
 
-$app->get('/dbtest', 'getStream');
+	$app->get('/dbtest', 'getStream');
 
-$app->get('/locktest','pushStream');
+	$app->get('/locktest','pushStream');
 
-$app->get('/dbinsert/:startYear','pushStream');
+	$app->get('/dbinsert/:startYear','pushStream');
 
-$app->run();
+	$app->run();
 
+} catch(Exception $e) {
+	echo "Caught exception: ", $e->getMessage(), "\n";
+}
 
 
 function getStream() {
