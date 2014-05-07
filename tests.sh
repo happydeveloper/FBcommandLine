@@ -3,3 +3,4 @@
  vendor/phpunit/phpunit/phpunit.php --stderr --bootstrap test/bootstrap.php test/fqlmanagerTestCase.php
  vendor/phpunit/phpunit/phpunit.php --stderr --bootstrap test/bootstrap.php test/streamFactoryTestCase.php
  vendor/phpunit/phpunit/phpunit.php --stderr --bootstrap test/bootstrap.php test/appSettingTestCase.php
+ vendor/phpunit/phpunit/phpunit.php --stderr --bootstrap test/bootstrap.php test/basetaskfacebookTestCase.php

@@ -1,12 +1,20 @@
 <?php
-class baseTaskFacebook
+class baseTaskFacebook implements ISingleton
 {
 	//페이스북 객체
 	public $facebook;
 	
 	//사용자 아이디 가져온다
 	public $user;
+	
+	protected static $Sfacebook;
 
+	public static function getInstance(){
+		static::$Sfacebook = new Facebook(array(
+		'appId' => '541305629256667',
+		'secret' => '95492b0183156cd27d69b1308980ef26',
+		'cookie' => true));
+	}
 
 	public function __construct() {
 		
