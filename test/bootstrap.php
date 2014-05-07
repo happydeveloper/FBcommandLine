@@ -1,5 +1,9 @@
 <?php
 $base = realpath(dirname(__FILE__) . '/..');
+/**
+* interface
+*/
+require_once "$base/classes/ISingleton.php";
 
 /**
 * Genearal 영역

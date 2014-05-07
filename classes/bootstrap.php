@@ -9,8 +9,10 @@ if (($loader = require_once __DIR__ . './../vendor/autoload.php') == null)  {
 }
 
 $base = realpath(dirname(__FILE__) . '/..');
+require_once "$base/classes/ISingleton.php";
+require_once "$base/classes/iMeasureCnt.php";
+
 require_once "$base/classes/fqlmanager.php";
 require_once "$base/classes/basetaskfacebook.php";
-require_once "$base/classes/iMeasureCnt.php";
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-class fqlManager
+class fqlManager implements ISingleton
 {
 	/**
 	* @var cached reference to singleton instance
