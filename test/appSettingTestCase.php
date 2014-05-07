@@ -20,5 +20,12 @@ class appSettingTestCase extends PHPUnit_Framework_TestCase
 		$setting = new appSetting();
 		$setting->jsonFileRead();
 	}
+
+	public function testCreateAppSettingFile()
+	{
+		$createSettingFile = new appSetting();
+		$createSettingFile->createAppSettingFile();
+		$this->assertFileExists("setting.json");
+	}
 }
 ?>
