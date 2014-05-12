@@ -46,7 +46,7 @@ class Comment extends baseTaskFacebook
 				{
 					if($key == 'text')
 					{ 
-						echo "<div class='note'>".$value."</div>";
+						echo "<div class='note'>".htmlspecialchars($value)."</div>";
 					}
 				}	
 				} 

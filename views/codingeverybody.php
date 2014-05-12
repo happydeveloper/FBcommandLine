@@ -101,8 +101,8 @@
 				if($key == 'post_id') {
 					//echo "<span>".$value." 댓글 가져오기 </span>";
 					if($comment) {
-					 $comment->getCommentText(htmlspecialchars($value));
-$commentTotalCnt += $comment->commentCnt;	
+					 $comment->getCommentText($value);
+					 $commentTotalCnt += $comment->commentCnt;	
 					}
 				}
 			}
