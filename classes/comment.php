@@ -29,6 +29,10 @@ class Comment extends baseTaskFacebook
 		}
 	}
 
+	public function getCommand()
+	{
+
+	}
 	public function getCommentText($post_id)
 	{
 		$this->getComment($post_id);
@@ -48,6 +52,8 @@ class Comment extends baseTaskFacebook
 					{ 
 						echo "<div class='note'>".htmlspecialchars($value)."</div>";
 					}
+					//if($key == 'fromid')
+						//$commentUser[$value]
 				}	
 				} 
 			}

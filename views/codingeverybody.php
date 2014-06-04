@@ -6,9 +6,14 @@
 	require_once 'classes/codingeverybody.php';
 	include_once 'nav.php';
 	require_once 'classes/comment.php';
+	require_once 'classes/Hashset.php';
+
 	$commentTotalCnt = 0;
 	$comment = new Comment();
 	$codingeverybody = new Codingeverybody();
+	$user_coauthor = new HashSet();
+	$comment_coauthor = new HashSet();
+
 	if($codingeverybody->user) {
 		if(!empty($_POST['start']) && !empty($_POST['end'])){ 
 //사용자입력 보안 처리
@@ -91,6 +96,10 @@
 					
 				}
 
+				if($key == 'actor_id') {
+					$user_coauthor->add($value);
+				}
+
 				if($key == 'permalink') {
 					echo "<div class='permalink'><a href='". $value."' target='_blank' >".$key." 영구링크</a></div>";
 				}
@@ -120,7 +129,8 @@
 	echo "<br> 댓글수 : ".$commentTotalCnt."<br>";
         echo "<br> 수집일시: ".time()."<br>";
 	echo "<br> 글 작성 일시 : ".$commentTotalCnt."<br>";
-	
+	echo "<br> 작성자들 : ".$user_coauthor->size();	
+	var_dump($user_coauthor);
 	//echo "<br> 글 작성 일시 ".mysql_real_escape_string($_POST['start'])."~".mysql_real_escape_string($_POST['end'])." 00:00";
     ?>
   <hr />

@@ -4,6 +4,8 @@ require_once 'classes/codingeverybody.php';
 require_once 'classes/library_my.php';
 require_once 'classes/codingeverybodyintodb.php';
 
+require_once 'classes/Hashset.php';
+
 //$Lib->cli();
 
 $app = new \Slim\Slim();
@@ -43,12 +45,33 @@ try {
 
 	$app->get('/dbinsert/:startYear','pushStream');
 
+	$app->get('/hashset', 'HashMap');
+
 	$app->run();
 
 } catch(Exception $e) {
 	echo "Caught exception: ", $e->getMessage(), "\n";
 }
 
+function HashMap()
+{
+	echo "hashMap";
+	$hashset = new HashSet();
+
+	echo "<br />";
+	$hashset->add("kanggoru");
+	$hashset->add("kangduru");
+	$hashset->add("kanggoru");
+
+	echo $hashset->size();
+	echo "<br />";
+	var_dump($hashset->objects());
+
+	echo "<br />";
+	foreach ($hashset->objects() as $value) {
+		echo $value." <br />";
+	}
+}
 
 function getStream() {
 	 $Lib = new Library_my();
