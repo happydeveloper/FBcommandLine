@@ -86,6 +86,13 @@ if($basetaskfacebook->user) {
 	else {
 		echo "<span>얼굴책 명령어 라인</span>";
 	}
+
+	if($basetaskfacebook->user){
+		var_dump($basetaskfacebook->user);
+
+        	echo  fqlManager::loadFql('MY_FRIENDS').$basetaskfacebook->user;
+	}
+
     ?>
   </body>
 
