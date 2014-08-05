@@ -1,9 +1,9 @@
 <?php
+
 require 'vendor/autoload.php';
 require_once 'classes/codingeverybody.php';
 require_once 'classes/library_my.php';
 require_once 'classes/codingeverybodyintodb.php';
-
 require_once 'classes/Hashset.php';
 
 //$Lib->cli();
@@ -14,7 +14,6 @@ try {
     	'debug' => true,
     	'templates.path' => 'views'
 	));
-
 	$app->get('/', function() use ($app) {
     		$app->render('_index.php');
 	}); 
@@ -39,6 +38,11 @@ try {
 		$app->render('datetimepicker.php');
 	})->via('GET', 'POST');
 
+	//검색기능 구현
+	$app->map('/ot_search', function() use($app) {
+		$app->render('ot_search.php');
+	})->via('GET','POST');
+	
 	$app->get('/dbtest', 'getStream');
 
 	$app->get('/locktest','pushStream');

@@ -17,6 +17,7 @@ class codingeverybodyintodb
  
   	public $sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key, actor_id, like_info, comment_info) values (:message, :message_tag, :permalink, :source_id, :created_time, :created, :post_id, :filter_key, :actor_id, :like_info, :comment_info);";
 
+	public $searchSql = "select * from stream s WHERE s.message like '%".$_POST['query']."%'";
 
 	public function __construct($db)
 	{
@@ -43,6 +44,27 @@ class codingeverybodyintodb
 		$stmt->execute();
 		$stmt->id = $this->db->lastInsertId();
 		$db = null;
+	}
+
+	public function search($query_str)
+	{
+		echo "검색 질의 어 " . $_POST['query'] . "11<br /> ";
+		$result = $this->db->query($this->searchSql);
+		foreach($result as $row){
+			print_r($row);
+		}
+		return false;
+		print_r($result);	
+		$stmt = $this->db->prepare($this->searchSql);
+		$stmt->bindParam(':query', $query_str, PDO::PARAM_STR);
+		$stmt->execute();
+		$stmt->get_result();
+		while($row = $stmt->fetch_array(MYSQLI_NUM)){
+			foreach($row as $r){
+				print $r;
+			}
+		}
+		
 	}
 }
 ?>

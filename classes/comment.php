@@ -50,7 +50,7 @@ class Comment extends baseTaskFacebook
 				{
 					if($key == 'text')
 					{ 
-						echo "<div class='note'>".htmlspecialchars($value)."</div>";
+						echo "<div class='note comment'>".htmlspecialchars($value)."</div>";
 					}
 					//if($key == 'fromid')
 						//$commentUser[$value]

@@ -1,0 +1,149 @@
+<?php 
+	require '_head.php';
+	include_once 'nav.php';
+?>
+<?php
+//OnLoad 초기 로드시 작업
+require 'vendor/autoload.php';
+require_once 'classes/codingeverybody.php';
+require_once 'classes/library_my.php';
+require_once 'classes/codingeverybodyintodb.php';
+require_once 'classes/Hashset.php';
+//	$commentTotalCnt = 0;
+//	$comment = new Comment();
+	$codingeverybody = new Codingeverybody();
+	$dm = new Dbmanager();
+	$codingeverybodyDB = new codingeverybodyintodb($dm->getConnection());
+//	$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
+//	$user_coauthor = new HashSet();
+//	$comment_coauthor = new HashSet();
+
+	if($codingeverybody->user) {
+		if(!empty($_POST['query'])){ 
+//사용자입력 보안 처리
+			$codingeverybodyDB->search($_POST['query']);
+		} else {
+		//	$codingeverybody->getStream('2010-12-31', '2011-01-01');
+		}
+	}
+
+?>
+
+    <?php if ($codingeverybody->user) : // 사용자 객체가 있는지 여부 체크 ?>
+<div class="well">
+      <a href="<?php echo 'common/logout.php'; ?>">얼굴북 나가기</a>
+
+    <!-- -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+  <script>
+  $(function() {
+      var clareCalendar = {
+								monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+       dayNamesMin: ['일','월','화','수','목','금','토'],
+								dateFormat: 'yy-mm-dd',
+								changeMonth: true, 
+								changeYear: true,
+								showMonthAfterYear: true
+							};
+      
+    $( "#start" ).datepicker(clareCalendar);
+      $( "#end" ).datepicker(clareCalendar);
+  });
+  </script>
+    <!-- -->
+    
+	<form action="./ot_search"  method="POST">
+	<?php
+	//날짜 셋팅
+	$today = date('Y-m-d');
+	$date = new DateTime($today);
+	$date->add(new DateInterval('P1D'));
+
+		echo "오늘   : ".$date->format('Y-m-d') . "<br />";
+	if(!empty($_POST['start'])) {
+		echo "검색일 : ".$_POST['start']."<br />";
+	} else {
+		echo "생활코딩 페이스북 첫 글 <br />";
+	}
+	?>
+
+		<p><label>조회 시작일</label><input type="text" name="start" id="start" value="<?php echo date('Y-m-d') ?>" /></p>
+        	<p><label>조회 종료일</label><input type="text" name="end"   id="end" value="<?php echo $date->format('Y-m-d') ?>"/></p>
+		<p><label>검색어 </label><input type="text" name="query" id="query" value="" /></p> 
+        	<input class="btn btn-primary" type="submit" />
+	</form>
+
+    <?php else: ?>
+      <div>
+        <a href="<?php echo $codingeverybody->facebook->getLoginUrl(); ?>">얼굴책 로그인</a>
+      </div>
+    <?php endif ?>
+</div>
+
+<hr />
+    <?php
+	date_default_timezone_set('Asia/Seoul');
+	echo "<h2> 검색결과 가져오기 영역 </h2>";
+
+	/*
+	if($codingeverybody->user &&  $codingeverybody->result != null) {
+	echo "글 갯수 : ".count($codingeverybody->result);
+        echo "수집일시: ".time()."<br>";
+	foreach($codingeverybody->result as $row){
+
+			//echo "<div class='post'> <article>";
+			//echo "<div> <article>";
+			echo "<div> <div>";
+			foreach($row as $key=>$value){
+				if($key == 'created_time') {
+				        // $kor_time = new Datetime($value);
+					echo "<span>".date('Y-m-d H:i:s', $value)."</span>";
+					
+				}
+
+				if($key == 'actor_id') {
+					$user_coauthor->add($value);
+				}
+
+				if($key == 'permalink') {
+					echo "<div class='permalink'><a href='". $value."' target='_blank' >".$key." 영구링크</a></div>";
+				}
+				if($key == 'message') {
+					echo "<div class='message'>".htmlspecialchars($value)."</div>";
+				}
+				
+				if($key == 'post_id') {
+					//echo "<span>".$value." 댓글 가져오기 </span>";
+					if($comment) {
+					 $comment->getCommentText($value);
+					 $commentTotalCnt += $comment->commentCnt;	
+					}
+				}
+			}
+			echo "<!-- <div class='later'>나중에 보기</div> -->";
+			echo "<!-- <div class='tags'>태그 달기 </div> -->";
+ 			echo "</div> </div>";
+	}
+
+	}
+	else {
+		echo "<span>생활코딩</span>";
+	}
+
+	echo "<br> 글 갯수 : ".count($codingeverybody->result);
+	echo "<br> 댓글수 : ".$commentTotalCnt."<br>";
+        echo "<br> 수집일시: ".time()."<br>";
+	echo "<br> 글 작성 일시 : ".$commentTotalCnt."<br>";
+	echo "<br> 작성자들 : ".$user_coauthor->size();	
+	var_dump($user_coauthor);
+	//echo "<br> 글 작성 일시 ".mysql_real_escape_string($_POST['start'])."~".mysql_real_escape_string($_POST['end'])." 00:00";
+	*/
+    ?>
+  <hr />
+  <span>생활코딩</span>
+</body>
+
+</html>
