@@ -34,6 +34,10 @@ try {
 		$app->render('ot_comment.php');
 	})->via('GET', 'POST');
 
+	$app->map('/nassole', function() use ($app) {
+		$app->render('nassole.php');
+	})->via('GET', 'POST');
+
 	$app->map('/datetimepicker', function() use($app) {
 		$app->render('datetimepicker.php');
 	})->via('GET', 'POST');

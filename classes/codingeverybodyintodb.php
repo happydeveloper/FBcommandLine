@@ -17,7 +17,7 @@ class codingeverybodyintodb
  
   	public $sql = "insert into stream(message, message_tags, permalink, source_id, created_time, created, post_id, filter_key, actor_id, like_info, comment_info) values (:message, :message_tag, :permalink, :source_id, :created_time, :created, :post_id, :filter_key, :actor_id, :like_info, :comment_info);";
 
-	public $searchSql = "select * from stream s WHERE s.message like '%".$_POST['query']."%'";
+	public $searchSql = "select * from stream s WHERE s.message like '%두루%'";
 
 	public function __construct($db)
 	{
@@ -49,12 +49,33 @@ class codingeverybodyintodb
 	public function search($query_str)
 	{
 		echo "검색 질의 어 " . $_POST['query'] . "11<br /> ";
+		
+		$stmt = $this->db->prepare($this->searchSql);
+		$param = array("%".$_POST['query']."%"," ");
+		//$stmt->bindParam(':query', $query_str, PDO::PARAM_STR);
+		$stmt->execute($param);
+		//echo $stmt->query;
+		$stmt->debugDumpParams();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+ini_set('memory_limit', '-1');
+		echo json_encode($result);
+		//var_dump($result); 
+/* Fetch all of the remaining rows in the result set */
+//print("Fetch all of the remaining rows in the result set:\n");
+//$result = $stmt->fetchAll();
+//print_r($result);
+
+
+/*
 		$result = $this->db->query($this->searchSql);
 		foreach($result as $row){
 			print_r($row);
 		}
 		return false;
-		print_r($result);	
+*/
+		return false;
+
+/*		print_r($result);	
 		$stmt = $this->db->prepare($this->searchSql);
 		$stmt->bindParam(':query', $query_str, PDO::PARAM_STR);
 		$stmt->execute();
@@ -63,8 +84,8 @@ class codingeverybodyintodb
 			foreach($row as $r){
 				print $r;
 			}
-		}
-		
+	}
+	*/	
 	}
 }
 ?>
