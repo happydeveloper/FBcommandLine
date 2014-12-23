@@ -1,85 +1,50 @@
 <?php
-
 require 'vendor/autoload.php';
 require_once 'classes/codingeverybody.php';
 require_once 'classes/library_my.php';
 require_once 'classes/codingeverybodyintodb.php';
-require_once 'classes/Hashset.php';
 
 //$Lib->cli();
 
 $app = new \Slim\Slim();
-try {
-	$app->config(array(
-    	'debug' => true,
-    	'templates.path' => 'views'
-	));
-	$app->get('/', function() use ($app) {
-    		$app->render('_index.php');
-	}); 
+$app->config(array(
+    'debug' => true,
+    'templates.path' => 'views'
+));
+
+$app->get('/', function() use ($app) {
+    $app->render('_index.php');
+}); 
  
-	$app->get('/friends', function() use ($app) {
-    	$app->render('myfriends.php');
-	});
+$app->get('/friends', function() use ($app) {
+    $app->render('myfriends.php');
+});
 
-	$app->map('/codingeverybody', function() use ($app) {
-		$app->render('codingeverybody.php');
-	})->via('GET', 'POST'); 
+$app->map('/codingeverybody', function() use ($app) {
+	app->render('codingeverybody.php');
+})->via('GET', 'POST'); 
 
-	$app->map('/engfordev', function() use ($app) {
-		$app->render('engfordev.php');
-	})->via('GET', 'POST');
+$app->map('/engfordev', function() use ($app) {
+	$app->render('engfordev.php');
+})->via('GET', 'POST');
 
-	$app->map('/comment', function() use($app) {
-		$app->render('ot_comment.php');
-	})->via('GET', 'POST');
+$app->map('/comment', function() use($app) {
+	$app->render('ot_comment.php');
+})->via('GET', 'POST');
 
-	$app->map('/nassole', function() use ($app) {
-		$app->render('nassole.php');
-	})->via('GET', 'POST');
+$app->map('/datetimepicker', function() use($app) {
+	$app->render('datetimepicker.php');
+})->via('GET', 'POST');
 
-	$app->map('/datetimepicker', function() use($app) {
-		$app->render('datetimepicker.php');
-	})->via('GET', 'POST');
+$app->get('/dbtest', 'getStream');
 
-	//검색기능 구현
-	$app->map('/ot_search', function() use($app) {
-		$app->render('ot_search.php');
-	})->via('GET','POST');
-	
-	$app->get('/dbtest', 'getStream');
+$app->get('/locktest','pushStream');
 
-	$app->get('/locktest','pushStream');
+$app->get('/dbinsert/:startYear','pushStream');
 
-	$app->get('/dbinsert/:startYear','pushStream');
+$app->run();
 
-	$app->get('/hashset', 'HashMap');
 
-	$app->run();
-
-} catch(Exception $e) {
-	echo "Caught exception: ", $e->getMessage(), "\n";
-}
-
-function HashMap()
-{
-	echo "hashMap";
-	$hashset = new HashSet();
-
-	echo "<br />";
-	$hashset->add("kanggoru");
-	$hashset->add("kangduru");
-	$hashset->add("kanggoru");
-
-	echo $hashset->size();
-	echo "<br />";
-	var_dump($hashset->objects());
-
-	echo "<br />";
-	foreach ($hashset->objects() as $value) {
-		echo $value." <br />";
-	}
-}
 
 function getStream() {
 	 $Lib = new Library_my();
