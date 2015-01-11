@@ -21,7 +21,7 @@ $app->get('/friends', function() use ($app) {
 });
 
 $app->map('/codingeverybody', function() use ($app) {
-	app->render('codingeverybody.php');
+	$app->render('codingeverybody.php');
 })->via('GET', 'POST'); 
 
 $app->map('/engfordev', function() use ($app) {
