@@ -10,6 +10,7 @@ FB_KEEP_SEARCH_TAG - 페이스북 글 아키이빙, 순간검색, 태깅, 글 �
 
 ### 개발 서버
 
-[ucloud 개발 서버](http://ucloud.duru.pe.kr/fcmd)
+아마존 서울 지역으로 변경
+
 
 
