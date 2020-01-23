@@ -1,112 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    My Name 
+  </title>
+</head>
+
+<body>
+  <h1>Get My Name from Facebook</h1>
+
 <?php
-require 'vendor/autoload.php';
-require_once 'classes/codingeverybody.php';
-require_once 'classes/library_my.php';
-require_once 'classes/codingeverybodyintodb.php';
 
-//$Lib->cli();
+require_once __DIR__ . '/vendor/autoload.php';   
 
-$app = new \Slim\Slim();
-$app->config(array(
-    'debug' => true,
-    'templates.path' => 'views'
-));
-
-$app->get('/', function() use ($app) {
-    $app->render('_index.php');
-}); 
- 
-$app->get('/friends', function() use ($app) {
-    $app->render('myfriends.php');
-});
-
-$app->map('/codingeverybody', function() use ($app) {
-	$app->render('codingeverybody.php');
-})->via('GET', 'POST'); 
-
-$app->map('/engfordev', function() use ($app) {
-	$app->render('engfordev.php');
-})->via('GET', 'POST');
-
-$app->map('/comment', function() use($app) {
-	$app->render('ot_comment.php');
-})->via('GET', 'POST');
-
-$app->map('/datetimepicker', function() use($app) {
-	$app->render('datetimepicker.php');
-})->via('GET', 'POST');
-
-$app->get('/dbtest', 'getStream');
-
-$app->get('/locktest','pushStream');
-
-$app->get('/dbinsert/:startYear','pushStream');
-
-$app->run();
+$fb = new \Facebook\Facebook([
+  'app_id' => '187124949355240',           //Replace {your-app-id} with your app ID
+  'app_secret' => 'b706108eac776ec5aa90e3ca0e34f09a',   //Replace {your-app-secret} with your app secret
+  'graph_api_version' => 'v5.0',
+]);
 
 
+try {
+   
+// Get your UserNode object, replace {access-token} with your token
+  $response = $fb->get('/me', $fb.default_ 'EAACqMGwiiugBADM66mxRNvf6nec8hukdfzfr2DqJrB3lnYZAaM7Tght2Hy58IMZBFRskt5CHZBbvhQir26FvL1jxYj8ZCZBTsbn9QpcugbE6YXSKg7WOsfjviFRyQgEMBwQIdAo2sexe87b0piNwg6uQGh0PGG1BsnLLw9XURwRNCgWYhZA4eQ31ZCpR2suy54xE8zClAEDNl42IHbS8JZCO4S345aGq7ZC2a2LU4jg6xgJvENOeEJp0d');
 
-function getStream() {
-	 $Lib = new Library_my();
-	 $Lib->grudTest();
+} catch(\Facebook\Exceptions\FacebookResponseException $e) {
+        // Returns Graph API errors when they occur
+  echo 'Graph returned an error: ' . $e->getMessage();
+  exit;
+} catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        // Returns SDK errors when validation fails or other local issues
+  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+  exit;
 }
 
+$me = $response->getGraphUser();
 
-function pushStream($startYear='2014'){
-  		try {
-		//DTO에 담아서 처리 함
-		//하루 단위로 처리함
- 		$codingeverybody = new Codingeverybody();
-		if($codingeverybody->user) {
-			echo "<a href=\"<?php echo 'common\/logout.php'; ?>\">logout</a>";
-			
-	        $Lib->makelog($startYear."data pushed stream into db.");	
-		for($i = 0; $i < 365; $i++)
-		{			
-			$baseDate = $startYear."-01-01";
-			$loadDate = date('Y-m-d', strtotime($baseDate. ' + '.$i.' days'));
-			echo $loadDate.'<br />';
-                       	$codingeverybody->getStream($loadDate, addDate($loadDate));
-				foreach($codingeverybody->result as $row){	
-				$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
-				foreach($row as $key=>$value){	
-					if($key == 'post_id') 
-                                        	$codingeverybodyintodb->post_id = $value;
-                                	if($key == 'created_time')
-                                        	$codingeverybodyintodb->create_time = date('Y-m-d H:i:s', $value);
-                                	if($key == 'permalink') 
-                                        	$codingeverybodyintodb->permalink = $value;
-                                	if($key == 'message') 
-                                        	$codingeverybodyintodb->message =$value;
-					if($key == 'message_tags')
-						$codingeverybodyintodb->tag =  json_encode($value); //!empty($value) ? var_dump($value) : "";
-					if($key == 'actor_id')
-						$codingeverybodyintodb->actor_id = $value;
-					if($key == 'comment_info')
-						$codingeverybodyintodb->comment_info = json_encode($value);
-					if($key == 'like_info')
-						$codingeverybodyintodb->like_info = json_encode($value);
-				
-				}
-				$codingeverybodyintodb->source_id = "174499879257223";
-				$codingeverybodyintodb->created = date("Y-m-d H:i:s");
-				$codingeverybodyintodb->filter_key = "The filter key to fetch data with. This key should be retrieved by querying the stream_filter FQL table or with the special values 'others' or 'owner'.";
-			
-				$codingeverybodyintodb->insert();
+       //All that is returned in the response
+echo 'All the data returned from the Facebook server: ' . $me;
 
-				}
-echo $loadDate.' 해당 날짜의 스트림 데이타베이스 넣기 완료 '.'<br />';
+       //Print out my name
+echo 'My name is ' . $me->getName();
 
-				$Lib->makelog($startYear.' complate');
-}		
-			} else 	{
-				$codingeverybodyintodb = new codingeverybodyintodb(getConnection());
-				$codingeverybodyintodb->insert();
-			}
-		} catch(PDOException $e) {
-			echo '{"error":{"text":'. $e->getMessage() .'}}';
-			$Lib->makelog('{"error":{"test":'.$e->getMessage().'}}');
-		}
-
-	}
 ?>
+
+</body>
+</html>

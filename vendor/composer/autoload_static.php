@@ -7,10 +7,16 @@ namespace Composer\Autoload;
 class ComposerStaticInit711cb068e5f1333b2263bfa09ce8fe5a
 {
     public static $files = array (
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Component\\Yaml\\' => 23,
+        ),
         'F' => 
         array (
             'Facebook\\' => 9,
@@ -18,6 +24,14 @@ class ComposerStaticInit711cb068e5f1333b2263bfa09ce8fe5a
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Component\\Yaml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
         'Facebook\\' => 
         array (
             0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
@@ -27,10 +41,6 @@ class ComposerStaticInit711cb068e5f1333b2263bfa09ce8fe5a
     public static $prefixesPsr0 = array (
         'S' => 
         array (
-            'Symfony\\Component\\Yaml\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/symfony/yaml',
-            ),
             'Slim' => 
             array (
                 0 => __DIR__ . '/..' . '/slim/slim',
@@ -39,12 +49,6 @@ class ComposerStaticInit711cb068e5f1333b2263bfa09ce8fe5a
     );
 
     public static $classMap = array (
-        'BaseFacebook' => __DIR__ . '/..' . '/facebook/php-sdk/src/base_facebook.php',
-        'Facebook' => __DIR__ . '/..' . '/facebook/php-sdk/src/facebook.php',
-        'FacebookApiException' => __DIR__ . '/..' . '/facebook/php-sdk/src/base_facebook.php',
-        'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/File/Iterator.php',
-        'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/File/Iterator/Facade.php',
-        'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/File/Iterator/Factory.php',
         'PHPUnit_Extensions_GroupTestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/PHPUnit/Extensions/GroupTestSuite.php',
         'PHPUnit_Extensions_PhptTestCase' => __DIR__ . '/..' . '/phpunit/phpunit/PHPUnit/Extensions/PhptTestCase.php',
         'PHPUnit_Extensions_PhptTestCase_Logger' => __DIR__ . '/..' . '/phpunit/phpunit/PHPUnit/Extensions/PhptTestCase/Logger.php',
@@ -221,7 +225,6 @@ class ComposerStaticInit711cb068e5f1333b2263bfa09ce8fe5a
         'PHP_CodeCoverage_Util' => __DIR__ . '/..' . '/phpunit/php-code-coverage/PHP/CodeCoverage/Util.php',
         'PHP_CodeCoverage_Util_InvalidArgumentHelper' => __DIR__ . '/..' . '/phpunit/php-code-coverage/PHP/CodeCoverage/Util/InvalidArgumentHelper.php',
         'PHP_CodeCoverage_Version' => __DIR__ . '/..' . '/phpunit/php-code-coverage/PHP/CodeCoverage/Version.php',
-        'PHP_Timer' => __DIR__ . '/..' . '/phpunit/php-timer/PHP/Timer.php',
         'PHP_Token' => __DIR__ . '/..' . '/phpunit/php-token-stream/PHP/Token.php',
         'PHP_TokenWithScope' => __DIR__ . '/..' . '/phpunit/php-token-stream/PHP/Token.php',
         'PHP_TokenWithScopeAndVisibility' => __DIR__ . '/..' . '/phpunit/php-token-stream/PHP/Token.php',
@@ -387,7 +390,13 @@ class ComposerStaticInit711cb068e5f1333b2263bfa09ce8fe5a
         'PHP_Token_WHITESPACE' => __DIR__ . '/..' . '/phpunit/php-token-stream/PHP/Token.php',
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/PHP/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/PHP/Token.php',
-        'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/Text/Template.php',
+        'SebastianBergmann\\FileIterator\\Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
+        'SebastianBergmann\\FileIterator\\Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'SebastianBergmann\\FileIterator\\Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
+        'SebastianBergmann\\Timer\\Exception' => __DIR__ . '/..' . '/phpunit/php-timer/src/Exception.php',
+        'SebastianBergmann\\Timer\\RuntimeException' => __DIR__ . '/..' . '/phpunit/php-timer/src/RuntimeException.php',
+        'SebastianBergmann\\Timer\\Timer' => __DIR__ . '/..' . '/phpunit/php-timer/src/Timer.php',
+        'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
