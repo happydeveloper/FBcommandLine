@@ -4,7 +4,7 @@ require_once 'classes/codingeverybody.php';
 require_once 'classes/library_my.php';
 require_once 'classes/codingeverybodyintodb.php';
 
-//$Lib->cli();
+$Lib->cli();
 
 $app = new \Slim\Slim();
 $app->config(array(

@@ -27,7 +27,7 @@ class appSetting
 		}
 	}
 
-	public function readSetting()
+	public function createSetting()
 	{
 		try{
 		$fileName = "setting.json";
@@ -46,6 +46,8 @@ class appSetting
 		fwrite($file, json_encode($json_array));
 		
 		fclose($file);
+
+		return  "file create";
 		
 		} catch (Exception $e) {
 			echo $e->getMessage().": Caugth Error";
@@ -61,9 +63,9 @@ class appSetting
 
 		var_dump($jsonRs);
 
-
 		$obj = json_decode($string);
-		print $obj->{'appId'}; // 12345
+		var_dump($obj);
+		return $obj->{'appId'}; // 12345
 	}
 
 }

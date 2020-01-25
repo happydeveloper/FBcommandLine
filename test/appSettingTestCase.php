@@ -1,5 +1,11 @@
 <?php
-class appSettingTestCase extends PHPUnit_Framework_TestCase
+declare(strict_types=1);
+
+use PHPUnit\Framework\TestCase;
+
+require_once "./bootstrap.php";
+
+class appSettingTestCase extends TestCase
 {
 	public function testConstructor()
 	{
@@ -11,14 +17,13 @@ class appSettingTestCase extends PHPUnit_Framework_TestCase
 	public function testReadSetting()
 	{
 		$setting = new appSetting();
-		$setting->readSetting();
-		//$this->assertEquals($setting->readSetting(), 12345);
+		$this->assertEquals($setting->createSetting(), "file create");
 	}
 
 	public function testJsonFileRead()
 	{
 		$setting = new appSetting();
-		$setting->jsonFileRead();
+		$this->assertEquals($setting->jsonFileRead(), "541305629256667");
 	}
 
 	public function testCreateAppSettingFile()

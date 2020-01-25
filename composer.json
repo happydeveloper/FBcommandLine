@@ -1,7 +1,14 @@
 {
     "require": {
-        "phpunit/phpunit": "3.7.28",
 	    "slim/slim": "2.*",
         "facebook/graph-sdk": "^5.7"
+    },
+    "autoload": {
+        "classmap": [
+            "classes/"
+        ]
+    },
+    "require-dev": {
+      "phpunit/phpunit": "^8"
     }
 }

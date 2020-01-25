@@ -4,6 +4,7 @@ $base = realpath(dirname(__FILE__) . '/..');
 * interface
 */
 require_once "$base/classes/ISingleton.php";
+require_once "$base/classes/IMeasureCnt.php";
 
 /**
 * Genearal 영역
