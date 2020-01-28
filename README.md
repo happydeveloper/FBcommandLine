@@ -12,5 +12,9 @@ FB_KEEP_SEARCH_TAG - 페이스북 글 아키이빙, 순간검색, 태깅, 글 �
 
 아마존 서울 지역으로 변경
 
+## LICENSE
+
+GPL3
+
 
 

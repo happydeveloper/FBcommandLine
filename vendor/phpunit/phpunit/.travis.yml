@@ -1,21 +1,41 @@
 language: php
 
+dist: bionic
+
 php:
-    - 5.3
-    - 5.4
+  - 7.2
+  - 7.3
+  - 7.4
+  - nightly
+
+matrix:
+  allow_failures:
+    - php: nightly
+  fast_finish: true
 
 env:
-    - INSTALL_PHP_INVOKER=0
-    - INSTALL_PHP_INVOKER=1
+  matrix:
+    - DEPENDENCIES="high"
+    - DEPENDENCIES="low"
+  global:
+    - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-ansi --no-progress --no-suggest"
+
+before_install:
+  - ./tools/composer clear-cache
+
+install:
+  - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry ./tools/composer update $DEFAULT_COMPOSER_FLAGS; fi
+  - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry ./tools/composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
 
 before_script:
-    - sh -c "if [ '$INSTALL_PHP_INVOKER' = '1' ]; then composer require --dev --prefer-source phpunit/php-invoker:\>=1.1.0,\<1.2.0; else composer install --dev --prefer-source; fi"
+  - echo 'zend.assertions=1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo 'assert.exception=On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
-script: ./phpunit.php --configuration ./build/travis-ci.xml
+script:
+  - ./phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email: false
-  irc:
-    channels:
-      - "irc.freenode.org#phpunit"
-    use_notice: true
